@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent" android:background="#ffffff">
+	<android.support.v4.widget.DrawerLayout
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			android:id="@+id/drawer_layout"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+		<FrameLayout
+				android:id="@+id/frame_container"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent" />
+
+		<LinearLayout
+					  android:orientation="vertical"
+					  android:layout_height="fill_parent"
+					  android:layout_width="wrap_content"
+					  android:minWidth="350dp"
+					  android:background="#ffffffff"
+					  android:id="@+id/cabinet"
+					  android:layout_gravity="start">
+			<LinearLayout
+					android:gravity="center_vertical"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:id="@+id/profileLayout"
+					android:orientation="horizontal"
+					android:background="#ff63889e"
+					>
+				<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginRight="50dp"
+						android:layout_marginLeft="10dp"
+						android:layout_marginTop="10dp"
+						android:layout_marginBottom="10dp">
+					<ImageView
+							android:layout_width="64dp"
+							android:layout_height="64dp"
+							android:id="@+id/appLogo" android:background="#ffffff"/>
+
+					<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:orientation="vertical"
+							android:layout_gravity="center_vertical">
+						<TextView
+								android:layout_height="wrap_content"
+								android:layout_width="wrap_content"
+								android:textSize="20sp"
+								android:text="example@flyerbox.ua"
+								android:id="@+id/profileEmail"
+								android:textAlignment="center"
+								android:autoText="false"
+								android:layout_marginLeft="15dp"
+								android:textColor="#ff224255"/>
+					</LinearLayout>
+				</LinearLayout>
+			</LinearLayout>
+
+			<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:layout_marginTop="1dp"
+					android:layout_marginBottom="1dp">
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:layout_marginTop="1dp"
+						android:layout_marginBottom="1dp"
+						android:layout_gravity="center_vertical" android:background="#ffb6d6e8"
+						android:id="@+id/polls">
+					<LinearLayout
+							android:layout_width="15dp"
+							android:layout_height="match_parent" android:background="#ff63889e">
+					</LinearLayout>
+					<TextView
+							android:layout_height="wrap_content"
+							android:layout_width="0dp"
+							android:layout_weight="1"
+							android:textSize="24sp"
+							android:text="My Polls"
+							android:id="@+id/profilePolls"
+							android:textAlignment="center"
+							android:autoText="false"
+							android:layout_marginLeft="5dp"
+							android:textColor="#ff224255"
+							android:layout_gravity="center_vertical"/>
+
+					<LinearLayout
+							android:layout_height="wrap_content"
+							android:layout_width="wrap_content"
+							android:layout_gravity="center_vertical">
+						<TextView
+								android:layout_height="wrap_content"
+								android:layout_width="wrap_content"
+								android:textSize="24sp"
+								android:text="10"
+								android:id="@+id/profileNewPolls"
+								android:textAlignment="textStart"
+								android:paddingLeft="5dp"
+								android:paddingRight="40dp"
+								android:textColor="#ffffffff" android:background="#ffa9590a"/>
+					</LinearLayout>
+				</LinearLayout>
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:layout_marginTop="1dp"
+						android:layout_marginBottom="1dp"
+						android:background="#ffb6d6e8"
+						android:id="@+id/coupons">
+					<LinearLayout
+							android:layout_width="15dp"
+							android:layout_height="match_parent" android:background="#ff63889e">
+					</LinearLayout>
+					<TextView
+							android:layout_height="wrap_content"
+							android:layout_width="0dp"
+							android:layout_weight="1"
+							android:textSize="24sp"
+							android:text="My Coupons"
+							android:id="@+id/profileCoupons"
+							android:textAlignment="center"
+							android:autoText="false"
+							android:layout_marginLeft="5dp"
+							android:textColor="#ff224255"
+							android:layout_gravity="center_vertical"/>
+					<LinearLayout
+							android:layout_height="wrap_content"
+							android:layout_width="wrap_content"
+							android:layout_gravity="center_vertical">
+						<TextView
+								android:layout_height="wrap_content"
+								android:layout_width="wrap_content"
+								android:textSize="24sp"
+								android:text="7"
+								android:id="@+id/profileNewCoupons"
+								android:textAlignment="textStart"
+								android:paddingLeft="5dp"
+								android:paddingRight="40dp"
+								android:textColor="#ffffffff" android:background="#ffa9590a"/>
+					</LinearLayout>
+				</LinearLayout>
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:layout_marginTop="1dp"
+						android:layout_marginBottom="1dp"
+						android:background="#ffb6d6e8"
+						android:id="@+id/settings">
+					<LinearLayout
+							android:layout_width="15dp"
+							android:layout_height="match_parent" android:background="#ff63889e">
+					</LinearLayout>
+					<TextView
+							android:layout_height="wrap_content"
+							android:layout_width="wrap_content"
+							android:textSize="24sp"
+							android:text="Settings"
+							android:id="@+id/profileSettings"
+							android:textAlignment="center"
+							android:autoText="false"
+							android:layout_marginLeft="5dp"
+							android:textColor="#ff224255"
+							android:layout_gravity="center_vertical"/>
+				</LinearLayout>
+				<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="50dp"
+						android:layout_marginTop="1dp"
+						android:layout_marginBottom="1dp"
+						android:background="#ffb6d6e8"
+						android:id="@+id/profile">
+					<LinearLayout
+							android:layout_width="15dp"
+							android:layout_height="match_parent" android:background="#ff63889e">
+					</LinearLayout>
+					<TextView
+							android:layout_height="wrap_content"
+							android:layout_width="wrap_content"
+							android:textSize="24sp"
+							android:text="Profile"
+							android:id="@+id/profileChange"
+							android:textAlignment="center"
+							android:autoText="false"
+							android:layout_marginLeft="5dp"
+							android:textColor="#ff224255"
+							android:layout_gravity="center_vertical"/>
+				</LinearLayout>
+			</LinearLayout>
+			<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:background="#FF63889E"
+					android:gravity="center_horizontal">
+				<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="50dp"
+						android:orientation="vertical"
+						android:gravity="center"
+						android:id="@+id/logout">
+					<ImageView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:background="@drawable/log_out"/>
+					<TextView android:layout_width="wrap_content"
+							  android:layout_height="wrap_content"
+							  android:textSize="24sp"
+							  android:text="Log out"
+							  android:textColor="#ffffff"/>
+				</LinearLayout>
+			</LinearLayout>
+		</LinearLayout>
+	</android.support.v4.widget.DrawerLayout>
+</LinearLayout>

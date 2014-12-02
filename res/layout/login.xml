@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="vertical"
+			  android:layout_width="match_parent"
+			  android:layout_height="match_parent" android:background="@drawable/logo" android:weightSum="1"
+			  android:baselineAligned="true">
+
+	<ImageView
+			android:layout_width="174dp"
+			android:layout_height="216dp"
+			android:id="@+id/imageView" android:layout_gravity="center_horizontal" android:src="@drawable/logo_splash"
+			android:layout_weight="0.06" android:layout_marginTop="-50dp"
+			android:visibility="invisible"/>
+	<EditText
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:inputType="textEmailAddress"
+			android:ems="10"
+			android:hint="Login"
+			android:id="@+id/loginField" android:layout_marginTop="-40dp" android:textColor="#E1494949"
+			android:layout_gravity="center_horizontal"/>
+	<EditText
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:inputType="textPassword"
+			android:hint="Password"
+			android:ems="10"
+			android:id="@+id/passField" android:layout_gravity="center_horizontal"
+			android:textColor="#e1494949"/>
+	<Button
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:text="Login"
+			android:id="@+id/loginButton" android:layout_gravity="center_horizontal"
+			android:onClick="loginClick"/>
+	<View
+			android:layout_width="wrap_content"
+			android:layout_height="1dp"
+			android:layout_marginBottom="3dp"
+			android:background="@drawable/line_separator" android:layout_gravity="center_vertical"
+			android:layout_marginTop="10dp"/>
+	<TextView
+			android:layout_width="62dp"
+			android:layout_height="wrap_content"
+			android:text="or"
+			android:background="#FFFFFF"
+			android:id="@+id/orTextView" android:layout_gravity="center_horizontal"
+			android:textColor="#d76a6a6a" android:layout_marginTop="-15dp" android:textAlignment="center"
+			android:gravity="center"
+			android:visibility="invisible"/>/>
+	<Button
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:text="Registration"
+			android:id="@+id/registrationButton" android:layout_gravity="center_horizontal"
+			android:layout_marginTop="5dp"
+			android:onClick="registrationClick"/>
+</LinearLayout>

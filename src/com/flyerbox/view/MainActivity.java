@@ -1,0 +1,120 @@
+package com.flyerbox.view;
+
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import com.flyerbox.R;
+
+/**
+ * Created by Roman on 9/23/14.
+ * 2:59 PM
+ */
+
+public class MainActivity extends Activity {
+    private ActionBarDrawerToggle mDrawerToggle;
+    private DrawerLayout mDrawerLayout;
+    private SharedPreferences sharedPreferences;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        findViewById(R.id.polls).setOnClickListener(new MenuItemClickListener(R.id.polls));
+        findViewById(R.id.coupons).setOnClickListener(new MenuItemClickListener(R.id.coupons));
+        findViewById(R.id.settings).setOnClickListener(new MenuItemClickListener(R.id.settings));
+        findViewById(R.id.profile).setOnClickListener(new MenuItemClickListener(R.id.profile));
+
+        findViewById(R.id.logout).setOnClickListener(new LinearLayout.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logOut();
+            }
+        });
+
+        displayView(R.id.polls);
+
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String emailKey = sharedPreferences.getString("userFirstName", "") + " " + sharedPreferences.getString("userLastName", "");
+
+        TextView emailText = (TextView) findViewById(R.id.profileEmail);
+        emailText.setText(emailKey);
+    }
+
+    private class MenuItemClickListener implements LinearLayout.OnClickListener{
+        private int item;
+
+        MenuItemClickListener(int itemId) {
+            this.item = itemId;
+        }
+
+        @Override
+        public void onClick(View view) {
+            // display view for selected nav drawer item
+            displayView(item);
+        }
+    }
+
+    private void displayView(int itemId) {
+        Fragment fragment = null;
+        if(itemId == R.id.polls)
+        {
+            fragment = new PollsFragment();
+        } else if(itemId == R.id.coupons)
+        {
+            fragment = new CouponsFragment();
+        } else if(itemId == R.id.settings)
+        {
+            fragment = new SettingsFragment();
+        } else if(itemId == R.id.profile)
+        {
+            fragment = new ProfileFragment();
+        }
+        if (fragment != null) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.frame_container, fragment).commit();
+
+            mDrawerLayout.closeDrawers();
+        } else {
+            // error in creating fragment
+            Log.e("MainActivity", "Error in creating fragment");
+        }
+    }
+
+    private  void  logOut(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        Editor editor = sharedPreferences.edit();
+
+        editor.putString("Email", "");
+        editor.putInt("Token", 0);
+        editor.putString("userFirstName", "");
+        editor.putString("userLastName", "");
+        editor.putString("userCountry", "");
+        editor.putString("userCity", "");
+        editor.apply();
+
+        Intent logOutIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(logOutIntent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Disable "Back" button
+    }
+
+}
