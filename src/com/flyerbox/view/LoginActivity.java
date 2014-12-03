@@ -167,6 +167,7 @@ public class LoginActivity extends Activity {
 
             editor.putInt("Token", session.getSessionID());
             editor.putString("Email", emailField.getText().toString());
+            editor.putInt("pollsCount", 0);
             editor.apply();
         }
 

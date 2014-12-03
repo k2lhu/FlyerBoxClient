@@ -52,11 +52,19 @@ public class MainActivity extends Activity {
 
         displayView(R.id.polls);
 
+
+        // Set email in SideDrawer
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         String emailKey = sharedPreferences.getString("userFirstName", "") + " " + sharedPreferences.getString("userLastName", "");
 
         TextView emailText = (TextView) findViewById(R.id.profileEmail);
         emailText.setText(emailKey);
+
+        // Set survey count
+        String pollsCountString = String.valueOf(sharedPreferences.getInt("pollsCount", 0));
+        TextView pollsC = (TextView) findViewById(R.id.profileNewPolls);
+        pollsC.setText(pollsCountString);
+
     }
 
     private class MenuItemClickListener implements LinearLayout.OnClickListener{

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import com.flyerbox.R;
 import com.flyerbox.logic.Poll;
 import com.flyerbox.logic.PollAdapter;
@@ -137,6 +138,13 @@ public class PollsFragment extends Fragment {
 
                 ++pollsCount;
             }
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("pollsCount", pollsCount - 1);
+            editor.apply();
+
+            String pollsCountString = String.valueOf(sharedPreferences.getInt("pollsCount", 0));
+            TextView pollsC = (TextView) getActivity().findViewById(R.id.profileNewPolls);
+            pollsC.setText(pollsCountString);
 
         } catch (JSONException e) {
             System.out.println("Can't create polls object");
