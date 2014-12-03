@@ -129,7 +129,7 @@ public class RegistrationActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "No Internet connection", Toast.LENGTH_LONG).show();
             } else if (response.contains("success")) {
                 Toast.makeText(getApplicationContext(), "You've been registered!", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class); // TODO registration and then go to main(??)
+                Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                 startActivity(intent);
             } else if (response.contains("email")) {
                 Toast.makeText(getApplicationContext(), "Your email already registered.", Toast.LENGTH_LONG).show();

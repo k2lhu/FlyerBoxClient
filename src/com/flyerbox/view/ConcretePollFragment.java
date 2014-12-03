@@ -41,6 +41,7 @@ public class ConcretePollFragment extends Fragment {
     private String[] answersArray = new String[4];
 
     int pollID;
+    int token = 0;
 
 
     public ConcretePollFragment() {
@@ -53,10 +54,12 @@ public class ConcretePollFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         new LoginPostReq().execute();
+
         View rootView = inflater.inflate(R.layout.fragment_concrete_poll, container, false);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-
+        token = sharedPreferences.getInt("Token", 0);
         rootView.findViewById(R.id.answerOne).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +94,7 @@ public class ConcretePollFragment extends Fragment {
 
     void getNext() {
         try {
+            System.out.println("RESPONSE!!!!!!  " + response);
             JSONObject obj = new JSONObject(response);
             String surveyDescription = obj.getString("survey_description");
             TextView pollName = (TextView) getActivity().findViewById(R.id.pollTitle);
@@ -195,16 +199,21 @@ public class ConcretePollFragment extends Fragment {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 
                 nameValuePairs.add(new BasicNameValuePair("survey", String.valueOf(pollID)));
-                nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(sharedPreferences.getInt("Token", 0))));
+
+                nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(token)));
+
+
+                System.out.println("Poll Token2: "+ String.valueOf(token));
+
 
                 //собераем их вместе и посылаем на сервер
                 postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 //получаем ответ от сервера
                 response = hc.execute(postMethod, res);
 
-                Log.d("Http Login Post Response:", response);
+                Log.d("Http GetSurvey Post Response:", response);
             } catch (Exception e) {
-                System.out.println("Exp=" + e + " \n Login Response from server = " + response);
+                System.out.println("Exp=" + e + " \n GetSurvey Response from server = " + response);
             }
         }
     }
