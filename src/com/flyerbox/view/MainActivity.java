@@ -40,7 +40,6 @@ public class MainActivity extends Activity {
 
         findViewById(R.id.polls).setOnClickListener(new MenuItemClickListener(R.id.polls));
         findViewById(R.id.coupons).setOnClickListener(new MenuItemClickListener(R.id.coupons));
-        findViewById(R.id.settings).setOnClickListener(new MenuItemClickListener(R.id.settings));
         findViewById(R.id.profile).setOnClickListener(new MenuItemClickListener(R.id.profile));
 
         findViewById(R.id.logout).setOnClickListener(new LinearLayout.OnClickListener() {
@@ -89,9 +88,6 @@ public class MainActivity extends Activity {
         } else if(itemId == R.id.coupons)
         {
             fragment = new CouponsFragment();
-        } else if(itemId == R.id.settings)
-        {
-            fragment = new SettingsFragment();
         } else if(itemId == R.id.profile)
         {
             fragment = new ProfileFragment();

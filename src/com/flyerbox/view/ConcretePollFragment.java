@@ -17,6 +17,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -39,7 +40,7 @@ public class ConcretePollFragment extends Fragment {
     private int[] answersArray = new int[4];
 
     JSONObject fullCompletedAnswers;
-    JSONArray completedAnswers = new JSONArray();
+    JSONObject completedAnswers = new JSONObject();
 
     int pollID;
     int token = 0;
@@ -56,7 +57,7 @@ public class ConcretePollFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        new LoginPostReq().execute();
+        new GetAnswersPostReq().execute();
 
         View rootView = inflater.inflate(R.layout.fragment_concrete_poll, container, false);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
@@ -65,7 +66,7 @@ public class ConcretePollFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectedAnswerID = 0;
-                currentQuestion = count-1;
+                currentQuestion = count - 1;
                 putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
@@ -74,7 +75,7 @@ public class ConcretePollFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectedAnswerID = 1;
-                currentQuestion = count-1;
+                currentQuestion = count - 1;
                 putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
@@ -83,7 +84,7 @@ public class ConcretePollFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectedAnswerID = 2;
-                currentQuestion = count-1;
+                currentQuestion = count - 1;
                 putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
@@ -92,7 +93,7 @@ public class ConcretePollFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 selectedAnswerID = 3;
-                currentQuestion = count-1;
+                currentQuestion = count - 1;
                 putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
@@ -133,13 +134,13 @@ public class ConcretePollFragment extends Fragment {
                 JSONObject answers = currentQuestionValue.getJSONObject("answers");
                 Iterator answerKeys = answers.keys();
 
-               // Fill answer field
+                // Fill answer field
                 while (answerKeys.hasNext()) {
 
-                        String currentAnswerKey = (String) answerKeys.next();
-                        JSONObject currentAnswerValue = answers.getJSONObject(currentAnswerKey);
+                    String currentAnswerKey = (String) answerKeys.next();
+                    JSONObject currentAnswerValue = answers.getJSONObject(currentAnswerKey);
 
-                        String answerText = currentAnswerValue.getString("text");
+                    String answerText = currentAnswerValue.getString("text");
 
                     if (currentAnswerKey.contains("answer_1")) {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerOne);
@@ -149,11 +150,11 @@ public class ConcretePollFragment extends Fragment {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerTwo);
                         answer.setText(answerText);
                         answersArray[1] = currentAnswerValue.getInt("id");
-                    }else if (currentAnswerKey.contains("answer_3")) {
+                    } else if (currentAnswerKey.contains("answer_3")) {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerThree);
                         answer.setText(answerText);
                         answersArray[2] = currentAnswerValue.getInt("id");
-                    }else if (currentAnswerKey.contains("answer_4")) {
+                    } else if (currentAnswerKey.contains("answer_4")) {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerFour);
                         answer.setText(answerText);
                         answersArray[3] = currentAnswerValue.getInt("id");
@@ -162,21 +163,11 @@ public class ConcretePollFragment extends Fragment {
                 }
                 count++;
                 System.out.println("Count: " + count);
-            }
-            else {
+            } else {
                 DialogFragment newFragment = new PollCompleteDialogFragment();
                 newFragment.show(getFragmentManager(), "complete");
 
-                fullCompletedAnswers = new JSONObject();
-                try {
-                    fullCompletedAnswers.put("answers", completedAnswers);
-                    fullCompletedAnswers.put("token", token);
-                    fullCompletedAnswers.put("survey_id", pollID);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println(fullCompletedAnswers.toString());
+                new PostAnswersPostReq().execute();
             }
 
         } catch (JSONException e) {
@@ -191,17 +182,13 @@ public class ConcretePollFragment extends Fragment {
 
     private void putAnswerToJSON(String question, int answer) {
         // TODO впихнуть в JSON и отправить нахуй на сервер
-        JSONObject concreteQuestion = new JSONObject();
         JSONObject concreteQuestionDetail = new JSONObject();
         try {
-            concreteQuestionDetail.put("question_id", selectedQuestionID);
-            concreteQuestionDetail.put("answer_id", answer);
+            concreteQuestionDetail.put("question_id", "" + selectedQuestionID);
+            concreteQuestionDetail.put("answer_id", "" + answer);
             System.out.println(concreteQuestionDetail);
 
-            concreteQuestion.put(question, concreteQuestionDetail);
-            System.out.println(concreteQuestion);
-
-            completedAnswers.put(concreteQuestion);
+            completedAnswers.put(question, concreteQuestionDetail);
             System.out.println(completedAnswers);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -209,7 +196,7 @@ public class ConcretePollFragment extends Fragment {
     }
 
 
-    private class LoginPostReq extends AsyncTask<String, String, String> {
+    private class GetAnswersPostReq extends AsyncTask<String, String, String> {
         @Override
         protected String doInBackground(String... params) {
             postData();
@@ -240,9 +227,7 @@ public class ConcretePollFragment extends Fragment {
 
                 nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(token)));
 
-
-                System.out.println("Poll Token2: "+ String.valueOf(token));
-
+                System.out.println("Poll Token2: " + String.valueOf(token));
 
                 //собераем их вместе и посылаем на сервер
                 postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -255,5 +240,50 @@ public class ConcretePollFragment extends Fragment {
             }
         }
     }
+
+    private class PostAnswersPostReq extends AsyncTask<String, String, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            postData();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        public void postData() {
+            try {
+                // создаем запрос на сервер
+                DefaultHttpClient hc = new DefaultHttpClient();
+                ResponseHandler<String> res = new BasicResponseHandler();
+                // post запрос
+                HttpPost postMethod = new HttpPost("http://flyerbox.herokuapp.com/saveSurvey");
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+
+                nameValuePairs.add(new BasicNameValuePair("survey_id", String.valueOf(pollID)));
+
+                nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(token)));
+
+                nameValuePairs.add(new BasicNameValuePair("answers", fullCompletedAnswers.toString()));
+
+                //собераем их вместе и посылаем на сервер
+                postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                //получаем ответ от сервера
+                response = hc.execute(postMethod, res);
+
+                Log.d("Http GetSurvey Post Response:", response);
+            } catch (Exception e) {
+                System.out.println("Exp=" + e + " \n GetSurvey Response from server = " + response);
+            }
+        }
+    }
+
 }
 

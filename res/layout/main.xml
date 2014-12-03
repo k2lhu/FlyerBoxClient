@@ -146,29 +146,7 @@
 								android:textColor="#ffffffff" android:background="#ffa9590a"/>
 					</LinearLayout>
 				</LinearLayout>
-				<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="50dp"
-						android:layout_marginTop="1dp"
-						android:layout_marginBottom="1dp"
-						android:background="#ffb6d6e8"
-						android:id="@+id/settings">
-					<LinearLayout
-							android:layout_width="15dp"
-							android:layout_height="match_parent" android:background="#ff63889e">
-					</LinearLayout>
-					<TextView
-							android:layout_height="wrap_content"
-							android:layout_width="wrap_content"
-							android:textSize="24sp"
-							android:text="Settings"
-							android:id="@+id/profileSettings"
-							android:textAlignment="center"
-							android:autoText="false"
-							android:layout_marginLeft="5dp"
-							android:textColor="#ff224255"
-							android:layout_gravity="center_vertical"/>
-				</LinearLayout>
+
 				<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="50dp"
