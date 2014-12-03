@@ -4,64 +4,10 @@
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent" android:background="#ffffff">
-	<LinearLayout
+	<ListView
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical"
-			android:id="@+id/questionTemp">
-		<LinearLayout
-				android:layout_width="match_parent"
-				android:orientation="horizontal"
-				android:layout_height="75dp"
-				android:background="#ffffff"
-				android:id="@+id/profile">
-			<LinearLayout
-					android:layout_width="5dp"
-					android:layout_height="match_parent" android:background="#f650515d">
-			</LinearLayout>
-			<LinearLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_weight="1"
-					android:orientation="vertical"
-					android:layout_gravity="center_vertical">
-				<TextView
-						android:layout_height="wrap_content"
-						android:layout_width="wrap_content"
-						android:textSize="24sp"
-						android:text="Mc'Donalds"
-						android:id="@+id/concretePollTitle"
-						android:textAlignment="center"
-						android:autoText="false"
-						android:layout_marginLeft="20dp"
-						android:textColor="#000000" android:textStyle="bold"/>
-				<TextView
-						android:layout_height="wrap_content"
-						android:layout_width="wrap_content"
-						android:textSize="18sp"
-						android:text="Some description"
-						android:id="@+id/concretePollDescr"
-						android:textAlignment="center"
-						android:autoText="false"
-						android:layout_marginLeft="20dp"
-						android:textColor="#000000"/>
-			</LinearLayout>
-			<LinearLayout
-					android:layout_width="30dp"
-					android:layout_height="30dp"
-					android:layout_margin="10dp"
-					android:background="#ffff4b44"
-					android:gravity="right">
-				<ImageView
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						android:background="@drawable/round_notif"/>
-			</LinearLayout>
-		</LinearLayout>
-		<LinearLayout
-				android:layout_width="match_parent"
-				android:layout_height="1dp"
-				android:background="#4c33354b">
-		</LinearLayout>
-	</LinearLayout>
+			android:layout_height="match_parent"
+			android:id="@+id/pollsList">
+
+	</ListView>
 </LinearLayout>

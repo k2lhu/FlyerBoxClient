@@ -1,5 +1,6 @@
 package com.flyerbox.view;
 
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -39,8 +40,14 @@ public class ConcretePollFragment extends Fragment {
     private int count = 1;
     private String[] answersArray = new String[4];
 
+    int pollID;
+
 
     public ConcretePollFragment() {
+    }
+
+    public void setPollID(int pollID) {
+        this.pollID = pollID;
     }
 
     @Override
@@ -141,9 +148,13 @@ public class ConcretePollFragment extends Fragment {
                     }
 
                 }
-            } // TODO если нет больше вопросов, пишем "Опрос завершён и отправляем результат на сервер.
-            count++;
-            putInToJSON();
+                count++;
+                putInToJSON();
+            }
+            else {
+                DialogFragment newFragment = new PollCompleteDialogFragment();
+                newFragment.show(getFragmentManager(), "complete");
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -183,7 +194,7 @@ public class ConcretePollFragment extends Fragment {
                 // передаём параметры в списке
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 
-                nameValuePairs.add(new BasicNameValuePair("survey", String.valueOf(300)));
+                nameValuePairs.add(new BasicNameValuePair("survey", String.valueOf(pollID)));
                 nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(sharedPreferences.getInt("Token", 0))));
 
                 //собераем их вместе и посылаем на сервер
