@@ -2,6 +2,7 @@ package com.flyerbox.logic;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,19 @@ public class PollAdapter extends BaseAdapter {
         TextView description = (TextView) convertView.findViewById(R.id.pollItemDescription);
         LinearLayout status = (LinearLayout) convertView.findViewById(R.id.pollItemStatus);
 
-        item.setTag(data.get(position).getId());
-        title.setText(data.get(position).getTitle());
-        description.setText(data.get(position).getDescription());
-        if (data.get(position).isWatched()){
-            status.setVisibility(LinearLayout.INVISIBLE);
+        item.setTag(getItem(position).getId());
+        title.setText(getItem(position).getTitle());
+        description.setText(getItem(position).getDescription());
+        if (getItem(position).isWatched()){
+            title.setTextColor(Color.DKGRAY);
         } else {
-            status.setVisibility(LinearLayout.VISIBLE);
+            title.setTextColor(Color.BLACK);
         }
+        System.out.println("Position: " + position + " Status: " + data.get(position).isWatched());
+
+        convertView.setClickable(getItem(position).isWatched());
+        convertView.setEnabled(!getItem(position).isWatched());
+        status.setEnabled(!getItem(position).isWatched());
 
         return convertView;
     }

@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_enabled="false">
-        <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
-            <item>
-                <shape android:shape="rectangle">
-                    <solid android:color="#ffc2c3ad" />
-                </shape>
-            </item>
-
-            <item android:bottom="1dp">
-                <shape android:shape="rectangle">
-                    <solid android:color="#ff000000" />
-                </shape>
-            </item>
-
-            <item android:bottom="1dp" android:left="5dp">
-                <shape android:shape="rectangle">
-                    <solid android:color="#ffcecece" />
-                </shape>
-            </item>
-        </layer-list>
-    </item>
-
     <item android:state_pressed="true">
         <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
             <item>
@@ -33,13 +11,13 @@
 
             <item android:bottom="1dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="#ff000000" />
+                    <solid android:color="#ff789673" />
                 </shape>
             </item>
 
             <item android:bottom="1dp" android:left="5dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="#ffcecece" />
+                    <solid android:color="#ffc8e8c3" />
                 </shape>
             </item>
         </layer-list>
@@ -55,7 +33,7 @@
 
             <item android:bottom="1dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="#ff575863" />
+                    <solid android:color="#ff466342" />
                 </shape>
             </item>
 

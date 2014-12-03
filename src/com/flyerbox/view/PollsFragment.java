@@ -132,6 +132,7 @@ public class PollsFragment extends Fragment {
                 // Create new item in List
                 polls.add(new Poll(surveyDescription, "", Integer.parseInt(surveyID)));
 
+
                 System.out.println("ANSWER!!!   -->" + surveyDescription + Integer.parseInt(surveyID));
                 System.out.println(pollsCount);
                 System.out.println("survey_" + pollsCount);
