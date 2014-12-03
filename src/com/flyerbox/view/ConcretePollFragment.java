@@ -2,8 +2,6 @@ package com.flyerbox.view;
 
 import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.flyerbox.R;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ResponseHandler;
@@ -23,22 +20,26 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.util.*;
 
 /**
  * Created by tmrafael on 27.11.2014.
  */
 public class ConcretePollFragment extends Fragment {
-    private ArrayList<String> questionsArray = new ArrayList<String>();
-    private int answerId;
+    private int selectedQuestionID;
+    private int selectedAnswerID;
+    private int currentQuestion;
     private String response;
     private SharedPreferences sharedPreferences;
     private int count = 1;
-    private String[] answersArray = new String[4];
+    private int[] answersArray = new int[4];
+
+    JSONObject fullCompletedAnswers;
+    JSONArray completedAnswers = new JSONArray();
 
     int pollID;
     int token = 0;
@@ -63,28 +64,36 @@ public class ConcretePollFragment extends Fragment {
         rootView.findViewById(R.id.answerOne).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerId = 0;
+                selectedAnswerID = 0;
+                currentQuestion = count-1;
+                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
         });
         rootView.findViewById(R.id.answerTwo).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerId = 1;
+                selectedAnswerID = 1;
+                currentQuestion = count-1;
+                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
         });
         rootView.findViewById(R.id.answerThree).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerId = 2;
+                selectedAnswerID = 2;
+                currentQuestion = count-1;
+                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
         });
         rootView.findViewById(R.id.answerFour).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerId = 3;
+                selectedAnswerID = 3;
+                currentQuestion = count-1;
+                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
                 getNext();
             }
         });
@@ -103,14 +112,13 @@ public class ConcretePollFragment extends Fragment {
             JSONObject questions = obj.getJSONObject("questions");
             Iterator question = questions.keys();
 
-
             // Get question #(count)
             if (questions.toString().contains("question_" + count)) {
                 String currentQuestionKey = "question_" + count;
                 JSONObject currentQuestionValue = questions.getJSONObject(currentQuestionKey);
 
                 // Add quiestion ID to array
-                questionsArray.add(currentQuestionValue.getString("question_id"));
+                selectedQuestionID = currentQuestionValue.getInt("question_id");
 
                 // Set text to field in View
                 String questionText = currentQuestionValue.getString("question_text");
@@ -136,28 +144,39 @@ public class ConcretePollFragment extends Fragment {
                     if (currentAnswerKey.contains("answer_1")) {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerOne);
                         answer.setText(answerText);
-                        answersArray[0] = currentAnswerValue.getString("id");
+                        answersArray[0] = currentAnswerValue.getInt("id");
                     } else if (currentAnswerKey.contains("answer_2")) {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerTwo);
                         answer.setText(answerText);
-                        answersArray[1] = currentAnswerValue.getString("id");
+                        answersArray[1] = currentAnswerValue.getInt("id");
                     }else if (currentAnswerKey.contains("answer_3")) {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerThree);
                         answer.setText(answerText);
-                        answersArray[2] = currentAnswerValue.getString("id");
+                        answersArray[2] = currentAnswerValue.getInt("id");
                     }else if (currentAnswerKey.contains("answer_4")) {
                         TextView answer = (TextView) getActivity().findViewById(R.id.answerFour);
                         answer.setText(answerText);
-                        answersArray[3] = currentAnswerValue.getString("id");
+                        answersArray[3] = currentAnswerValue.getInt("id");
                     }
 
                 }
                 count++;
-                putInToJSON();
+                System.out.println("Count: " + count);
             }
             else {
                 DialogFragment newFragment = new PollCompleteDialogFragment();
                 newFragment.show(getFragmentManager(), "complete");
+
+                fullCompletedAnswers = new JSONObject();
+                try {
+                    fullCompletedAnswers.put("answers", completedAnswers);
+                    fullCompletedAnswers.put("token", token);
+                    fullCompletedAnswers.put("survey_id", pollID);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println(fullCompletedAnswers.toString());
             }
 
         } catch (JSONException e) {
@@ -166,8 +185,27 @@ public class ConcretePollFragment extends Fragment {
 
     }
 
-    private void putInToJSON() {
+    public int getCount() {
+        return count;
+    }
+
+    private void putAnswerToJSON(String question, int answer) {
         // TODO впихнуть в JSON и отправить нахуй на сервер
+        JSONObject concreteQuestion = new JSONObject();
+        JSONObject concreteQuestionDetail = new JSONObject();
+        try {
+            concreteQuestionDetail.put("question_id", selectedQuestionID);
+            concreteQuestionDetail.put("answer_id", answer);
+            System.out.println(concreteQuestionDetail);
+
+            concreteQuestion.put(question, concreteQuestionDetail);
+            System.out.println(concreteQuestion);
+
+            completedAnswers.put(concreteQuestion);
+            System.out.println(completedAnswers);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
