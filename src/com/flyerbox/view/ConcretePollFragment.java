@@ -3,6 +3,7 @@ package com.flyerbox.view;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class ConcretePollFragment extends Fragment {
     private int currentQuestion;
     private String response;
     private SharedPreferences sharedPreferences;
+    private ProgressDialog progressDialog;
     private int count = 1;
     private int[] answersArray = new int[4];
 
@@ -55,12 +57,19 @@ public class ConcretePollFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        // Set Progress Spinner
+        progressDialog = new ProgressDialog(getActivity());
+        // Load data from the server
         new GetAnswersPostReq().execute();
 
+        // Load view
         View rootView = inflater.inflate(R.layout.fragment_concrete_poll, container, false);
+
+        // Load Shared Preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         token = sharedPreferences.getInt("Token", 0);
+
+        // Response to answer clicks
         rootView.findViewById(R.id.answerOne).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -204,12 +213,16 @@ public class ConcretePollFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
+            progressDialog.dismiss();
             getNext();
         }
 
         @Override
         protected void onPreExecute() {
-
+            progressDialog.setMessage("Loading...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
         }
 
         public void postData() {

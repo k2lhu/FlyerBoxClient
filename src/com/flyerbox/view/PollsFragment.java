@@ -2,6 +2,7 @@ package com.flyerbox.view;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -41,18 +42,27 @@ public class PollsFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private String response;
     private int pollsCount = 1;
+    private ProgressDialog progressDialog;
     int token = 0;
 
-    public PollsFragment(){}
+    public PollsFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        // Create Progress Spinner
+        progressDialog = new ProgressDialog(getActivity());
+
         // Create new thread ASYNC
         new getSurveyList().execute();
 
+        // Set View
         View rootView = inflater.inflate(R.layout.fragment_polls, container, false);
+        // Get Shared Preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         token = sharedPreferences.getInt("Token", 0);
+        //Load polls to View
         pollsList = (ListView) rootView.findViewById(R.id.pollsList);
 
         return rootView;
@@ -66,7 +76,7 @@ public class PollsFragment extends Fragment {
         pollsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedPollID = ((Poll)parent.getItemAtPosition(position)).getId();
+                selectedPollID = ((Poll) parent.getItemAtPosition(position)).getId();
                 Log.d("Polls Fragment", "Selected poll id: " + selectedPollID);
 
                 ConcretePollFragment questionFragment = new ConcretePollFragment();
@@ -88,12 +98,16 @@ public class PollsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
+            progressDialog.dismiss();
             runLoadPolls();
         }
 
         @Override
         protected void onPreExecute() {
-
+            progressDialog.setMessage("Loading...");
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            progressDialog.setIndeterminate(true);
+            progressDialog.show();
         }
 
         public void postData() {
@@ -122,7 +136,7 @@ public class PollsFragment extends Fragment {
     void loadPolls() {
         try {
             JSONObject resp = new JSONObject(response);
-            while(resp.toString().contains("survey_" + pollsCount)) {
+            while (resp.toString().contains("survey_" + pollsCount)) {
                 JSONObject concreteSurvey = resp.getJSONObject("survey_" + pollsCount);
 
                 String surveyID = concreteSurvey.getString("id");
@@ -130,11 +144,6 @@ public class PollsFragment extends Fragment {
 
                 // Create new item in List
                 polls.add(new Poll(surveyDescription, "", Integer.parseInt(surveyID)));
-
-
-                System.out.println("ANSWER!!!   -->" + surveyDescription + Integer.parseInt(surveyID));
-                System.out.println(pollsCount);
-                System.out.println("survey_" + pollsCount);
 
                 ++pollsCount;
             }

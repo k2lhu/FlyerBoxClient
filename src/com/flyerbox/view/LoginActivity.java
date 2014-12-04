@@ -44,9 +44,12 @@ public class LoginActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-        progressDialog = new ProgressDialog(this);
 
+        // Set Progress Spinner
+        progressDialog = new ProgressDialog(this);
+        // Load Shared Preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        // Autologin
         if (!sharedPreferences.getString("Email", "").equals(""))
         {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -106,6 +109,7 @@ public class LoginActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
+            progressDialog.setMessage("Loading...");
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setIndeterminate(true);
             progressDialog.show();
