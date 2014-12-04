@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="400dp"
+              android:layout_height="250dp"
+              android:background="#FFFFFFFF"
+              android:weightSum="100">
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="#ff000000"
+            android:textSize="20sp"
+            android:text="Congratulations"
+            android:background="#ff789673"/>
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="#ff000000"
+            android:textSize="18sp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="You have successfully completed the survey. Coupon will be credited to your account soon. Thank you"
+            />
+    <TextView
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="40"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="#ff000000"
+            android:textSize="20sp"
+            android:text="Return to the polls"
+            android:background="@drawable/dialog_button"
+            android:id="@+id/poll_dialog_return_button"/>
+</LinearLayout>

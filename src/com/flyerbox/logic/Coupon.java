@@ -1,6 +1,8 @@
 package com.flyerbox.logic;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by tmrafael on 03.12.2014.
@@ -18,6 +20,8 @@ public class Coupon {
         this.used = used;
         this.discount = discount;
         this.expire = expire;
+
+        getCoolTime();
     }
 
     public Coupon() {
@@ -62,4 +66,19 @@ public class Coupon {
     public void setExpire(Date expire) {
         this.expire = expire;
     }
+
+
+    public String getCoolTime() {
+        Calendar diff = Calendar.getInstance();
+        diff.setTimeInMillis(expire.getTime() - new Date().getTime());
+
+        if(expire.getTime() - new Date().getTime() > 0) {
+            return (diff.get(Calendar.DAY_OF_YEAR) - 1) + " days "
+                    + diff.get(Calendar.HOUR_OF_DAY) + ":"
+                    + diff.get(Calendar.MINUTE) + ":" + diff.get(Calendar.SECOND);
+        }
+        used = true;
+        return "used or expired";
+    }
+
 }

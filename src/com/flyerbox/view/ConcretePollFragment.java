@@ -1,5 +1,6 @@
 package com.flyerbox.view;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -7,9 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.flyerbox.R;
@@ -164,8 +163,8 @@ public class ConcretePollFragment extends Fragment {
                 count++;
                 System.out.println("Count: " + count);
             } else {
-                DialogFragment newFragment = new PollCompleteDialogFragment();
-                newFragment.show(getFragmentManager(), "complete");
+                Dialog completeDialog = new PollDialog(getActivity(), 0, getActivity().getFragmentManager());
+                completeDialog.show();
 
                 new PostAnswersPostReq().execute();
             }

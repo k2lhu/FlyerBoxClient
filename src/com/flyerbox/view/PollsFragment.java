@@ -46,8 +46,7 @@ public class PollsFragment extends Fragment {
     public PollsFragment(){}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Create new thread ASYNC
         new getSurveyList().execute();
 
