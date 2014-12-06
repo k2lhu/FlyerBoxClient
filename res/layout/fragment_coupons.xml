@@ -3,14 +3,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent" android:background="#7DB25E">
+			  android:layout_height="match_parent"
+			  android:background="@drawable/coupons_background"
+			  android:id="@+id/couponsNoInternet">
 	<ListView
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:id="@+id/couponsList"
 			android:divider="@null"
 			android:dividerHeight="0dp"
-			android:paddingTop="25dp">
+			android:layout_marginLeft="75dp"
+			android:layout_marginRight="75dp"
+			android:layout_marginTop="50dp"
+			android:layout_marginBottom="50dp">
 
 	</ListView>
 </LinearLayout>

@@ -96,10 +96,13 @@ public class PollsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
+            LinearLayout pollsBackground = (LinearLayout) getActivity().findViewById(R.id.pollsNoInternet);
             if (response == null) {
                 Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_LONG).show();
+                pollsBackground.setEnabled(false);
             } else {
                 runLoadPolls();
+                pollsBackground.setEnabled(true);
             }
         }
 

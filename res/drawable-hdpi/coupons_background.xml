@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <solid android:color="#7DB25E" />
+                </shape>
+            </item>
+            <item>
+                <bitmap android:src="@drawable/no_connection" android:gravity="center">
+                </bitmap>
+            </item>
+        </layer-list>
+    </item>
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#7DB25E" />
+        </shape>
+    </item>
+</selector>
