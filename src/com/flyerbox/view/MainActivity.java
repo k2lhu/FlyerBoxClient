@@ -38,6 +38,9 @@ public class MainActivity extends Activity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        LinearLayout listItem = (LinearLayout) findViewById(R.id.polls);
+        listItem.setEnabled(false);
+
         findViewById(R.id.polls).setOnClickListener(new MenuItemClickListener(R.id.polls));
         findViewById(R.id.coupons).setOnClickListener(new MenuItemClickListener(R.id.coupons));
         findViewById(R.id.profile).setOnClickListener(new MenuItemClickListener(R.id.profile));
@@ -77,6 +80,15 @@ public class MainActivity extends Activity {
         public void onClick(View view) {
             // display view for selected nav drawer item
             displayView(item);
+            LinearLayout listItem = (LinearLayout) findViewById(item);
+            LinearLayout other = (LinearLayout) findViewById(R.id.polls);
+            other.setEnabled(true);
+            other = (LinearLayout) findViewById(R.id.coupons);
+            other.setEnabled(true);
+            other = (LinearLayout) findViewById(R.id.profile);
+            other.setEnabled(true);
+
+            listItem.setEnabled(false);
         }
     }
 

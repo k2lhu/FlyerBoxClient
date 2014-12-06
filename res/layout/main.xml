@@ -19,179 +19,155 @@
 					  android:layout_height="fill_parent"
 					  android:layout_width="wrap_content"
 					  android:minWidth="350dp"
-					  android:background="#ffffffff"
+					  android:background="#ffd64732"
 					  android:id="@+id/cabinet"
 					  android:layout_gravity="start">
-			<LinearLayout
-					android:gravity="center_vertical"
-					android:layout_width="match_parent"
+			<TextView
 					android:layout_height="wrap_content"
-					android:id="@+id/profileLayout"
-					android:orientation="horizontal"
-					android:background="#ff63889e"
-					>
-				<LinearLayout
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:layout_marginRight="50dp"
-						android:layout_marginLeft="10dp"
-						android:layout_marginTop="10dp"
-						android:layout_marginBottom="10dp">
-					<ImageView
-							android:layout_width="64dp"
-							android:layout_height="64dp"
-							android:id="@+id/appLogo" android:background="#ffffff"/>
-
-					<LinearLayout
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:orientation="vertical"
-							android:layout_gravity="center_vertical">
-						<TextView
-								android:layout_height="wrap_content"
-								android:layout_width="wrap_content"
-								android:textSize="20sp"
-								android:text="example@flyerbox.ua"
-								android:id="@+id/profileEmail"
-								android:textAlignment="center"
-								android:autoText="false"
-								android:layout_marginLeft="15dp"
-								android:textColor="#ff224255"/>
-					</LinearLayout>
-				</LinearLayout>
-			</LinearLayout>
+					android:layout_width="match_parent"
+					android:padding="15dp"
+					android:textSize="35sp"
+					android:text="example@flyerbox.ua"
+					android:id="@+id/profileEmail"
+					android:textAlignment="center"
+					android:gravity="center"
+					android:autoText="false"
+					android:textColor="#ffffffff"
+					android:background="#ffb62c26"/>
 
 			<LinearLayout
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:orientation="vertical"
-					android:layout_marginTop="1dp"
-					android:layout_marginBottom="1dp">
+					android:orientation="vertical">
 				<LinearLayout
 						android:layout_width="match_parent"
-						android:layout_height="50dp"
-						android:layout_marginTop="1dp"
-						android:layout_marginBottom="1dp"
-						android:layout_gravity="center_vertical" android:background="#ffb6d6e8"
+						android:layout_height="wrap_content"
+						android:paddingTop="2dp"
+						android:paddingBottom="2dp"
+						android:paddingLeft="10dp"
+						android:paddingRight="10dp"
+						android:background="@drawable/drawer_item_selector"
 						android:id="@+id/polls">
-					<LinearLayout
-							android:layout_width="15dp"
-							android:layout_height="match_parent" android:background="#ff63889e">
-					</LinearLayout>
 					<TextView
 							android:layout_height="wrap_content"
 							android:layout_width="0dp"
 							android:layout_weight="1"
-							android:textSize="24sp"
+							android:textSize="25sp"
 							android:text="My Polls"
-							android:id="@+id/profilePolls"
 							android:textAlignment="center"
 							android:autoText="false"
-							android:layout_marginLeft="5dp"
-							android:textColor="#ff224255"
+							android:textColor="#c8ffffff"
 							android:layout_gravity="center_vertical"/>
-
-					<LinearLayout
-							android:layout_height="wrap_content"
-							android:layout_width="wrap_content"
-							android:layout_gravity="center_vertical">
-						<TextView
-								android:layout_height="wrap_content"
-								android:layout_width="wrap_content"
-								android:textSize="24sp"
-								android:text="10"
-								android:id="@+id/profileNewPolls"
-								android:textAlignment="textStart"
-								android:paddingLeft="5dp"
-								android:paddingRight="40dp"
-								android:textColor="#ffffffff" android:background="#ffa9590a"/>
-					</LinearLayout>
+					<TextView
+							android:layout_height="60dp"
+							android:layout_width="60dp"
+							android:textSize="24sp"
+							android:text="10"
+							android:id="@+id/profileNewPolls"
+							android:layout_gravity="center_vertical"
+							android:gravity="center"
+							android:textColor="#ffffffff"
+							android:background="@drawable/drawer_item_icon"/>
 				</LinearLayout>
 				<LinearLayout
 						android:layout_width="match_parent"
-						android:layout_height="50dp"
-						android:layout_marginTop="1dp"
-						android:layout_marginBottom="1dp"
-						android:background="#ffb6d6e8"
+						android:layout_height="wrap_content"
+						android:paddingTop="2dp"
+						android:paddingBottom="2dp"
+						android:paddingLeft="10dp"
+						android:paddingRight="10dp"
+						android:background="@drawable/drawer_item_selector"
 						android:id="@+id/coupons">
-					<LinearLayout
-							android:layout_width="15dp"
-							android:layout_height="match_parent" android:background="#ff63889e">
-					</LinearLayout>
 					<TextView
 							android:layout_height="wrap_content"
 							android:layout_width="0dp"
 							android:layout_weight="1"
-							android:textSize="24sp"
+							android:textSize="25sp"
 							android:text="My Coupons"
-							android:id="@+id/profileCoupons"
 							android:textAlignment="center"
 							android:autoText="false"
-							android:layout_marginLeft="5dp"
-							android:textColor="#ff224255"
+							android:textColor="#c8ffffff"
 							android:layout_gravity="center_vertical"/>
-					<LinearLayout
-							android:layout_height="wrap_content"
-							android:layout_width="wrap_content"
-							android:layout_gravity="center_vertical">
-						<TextView
-								android:layout_height="wrap_content"
-								android:layout_width="wrap_content"
-								android:textSize="24sp"
-								android:text="7"
-								android:id="@+id/profileNewCoupons"
-								android:textAlignment="textStart"
-								android:paddingLeft="5dp"
-								android:paddingRight="40dp"
-								android:textColor="#ffffffff" android:background="#ffa9590a"/>
-					</LinearLayout>
+					<TextView
+							android:layout_height="60dp"
+							android:layout_width="60dp"
+							android:textSize="24sp"
+							android:text="7"
+							android:id="@+id/profileNewCoupons"
+							android:layout_gravity="center_vertical"
+							android:gravity="center"
+							android:textColor="#ffffffff"
+							android:background="@drawable/drawer_item_icon"/>
 				</LinearLayout>
-
 				<LinearLayout
 						android:layout_width="match_parent"
-						android:layout_height="50dp"
-						android:layout_marginTop="1dp"
-						android:layout_marginBottom="1dp"
-						android:background="#ffb6d6e8"
+						android:layout_height="wrap_content"
+						android:paddingTop="2dp"
+						android:paddingBottom="2dp"
+						android:paddingLeft="10dp"
+						android:paddingRight="10dp"
+						android:background="@drawable/drawer_item_selector"
+						android:layout_marginTop="25dp"
 						android:id="@+id/profile">
-					<LinearLayout
-							android:layout_width="15dp"
-							android:layout_height="match_parent" android:background="#ff63889e">
-					</LinearLayout>
 					<TextView
 							android:layout_height="wrap_content"
 							android:layout_width="wrap_content"
-							android:textSize="24sp"
+							android:layout_weight="1"
+							android:textSize="25sp"
 							android:text="Profile"
-							android:id="@+id/profileChange"
 							android:textAlignment="center"
 							android:autoText="false"
-							android:layout_marginLeft="5dp"
-							android:textColor="#ff224255"
+							android:textColor="#c8ffffff"
 							android:layout_gravity="center_vertical"/>
+					<LinearLayout
+							android:layout_height="60dp"
+							android:layout_width="60dp"
+							android:textSize="24sp"
+							android:layout_gravity="center_vertical"
+							android:gravity="center"
+							android:textColor="#ffffffff"
+							android:background="@drawable/drawer_item_icon">
+						<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="match_parent"
+								android:background="@drawable/ic_action_person"
+								android:layout_margin="9dp"/>
+					</LinearLayout>
 				</LinearLayout>
-			</LinearLayout>
-			<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="match_parent"
-					android:background="#FF63889E"
-					android:gravity="center_horizontal">
 				<LinearLayout
-						android:layout_width="wrap_content"
+						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
-						android:layout_marginTop="50dp"
-						android:orientation="vertical"
-						android:gravity="center"
+						android:paddingTop="2dp"
+						android:paddingBottom="2dp"
+						android:paddingLeft="10dp"
+						android:paddingRight="10dp"
+						android:background="@drawable/drawer_item_selector"
+						android:layout_marginTop="25dp"
 						android:id="@+id/logout">
-					<ImageView
-							android:layout_width="wrap_content"
+					<TextView
 							android:layout_height="wrap_content"
-							android:background="@drawable/log_out"/>
-					<TextView android:layout_width="wrap_content"
-							  android:layout_height="wrap_content"
-							  android:textSize="24sp"
-							  android:text="Log out"
-							  android:textColor="#ffffff"/>
+							android:layout_width="wrap_content"
+							android:layout_weight="1"
+							android:textSize="25sp"
+							android:text="Log out"
+							android:textAlignment="center"
+							android:autoText="false"
+							android:textColor="#c8ffffff"
+							android:layout_gravity="center_vertical"/>
+					<LinearLayout
+							android:layout_height="60dp"
+							android:layout_width="60dp"
+							android:textSize="24sp"
+							android:layout_gravity="center_vertical"
+							android:gravity="center"
+							android:textColor="#ffffffff"
+							android:background="@drawable/drawer_item_icon">
+						<LinearLayout
+								android:layout_width="match_parent"
+								android:layout_height="match_parent"
+								android:background="@drawable/log_out_2"
+								android:layout_margin="9dp"/>
+					</LinearLayout>
 				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>

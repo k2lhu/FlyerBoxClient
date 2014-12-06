@@ -5,11 +5,12 @@
 		  android:versionName="1.0">
 	<uses-sdk android:minSdkVersion="18"/>
 	<uses-permission android:name="android.permission.INTERNET"/>
-	<application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
+	<application android:label="@string/app_name" android:icon="@drawable/icon"
+				 android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
 
 		// Activities
 		<activity android:name=".view.MainActivity"
-				  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+				  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
 				  android:screenOrientation="portrait">
 			<intent-filter>
 				<category android:name="android.intent.category.HOME"/>
@@ -17,13 +18,13 @@
 		</activity>
 
 		<activity android:name=".view.LoginActivity"
-				  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+				  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
 				  android:screenOrientation="portrait">
 
 		</activity>
 
 		<activity android:name=".view.SplashActivity"
-				  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+				  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
 				  android:screenOrientation="portrait">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
@@ -31,7 +32,7 @@
 			</intent-filter>
 		</activity>
 		<activity android:name=".view.RegistrationActivity"
-				  android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+				  android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
 				  android:screenOrientation="portrait">
 
 		</activity>

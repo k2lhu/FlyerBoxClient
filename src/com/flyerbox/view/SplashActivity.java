@@ -26,7 +26,7 @@ public class SplashActivity extends Activity {
             public void run() {
                 try {
                     super.run();
-                    sleep(2000);
+                    sleep(1500);
                 } catch (Exception e) {
                     Log.d("Error", "Splash screen");
                 } finally {

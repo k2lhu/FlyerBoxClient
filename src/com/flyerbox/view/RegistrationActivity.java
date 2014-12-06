@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -76,32 +78,35 @@ public class RegistrationActivity extends Activity {
 
         int checkFields = 7;
 
+        Drawable icon = getResources().getDrawable(R.drawable.ic_error);
+        icon.setBounds(0, 0, icon.getIntrinsicWidth() / 2, icon.getIntrinsicHeight() / 2);
+
         if (!CheckData.checkName(firstName.getText().toString())) {
-            firstName.setError("First name is incorrect");
+            firstName.setError(Html.fromHtml("<font color='black'>First name is incorrect</font>"), icon);
             checkFields--;
         }
         if (!CheckData.checkName(lastName.getText().toString())) {
-            lastName.setError("Last name is incorrect");
+            lastName.setError(Html.fromHtml("<font color='black'>Last name is incorrect</font>"), icon);
             checkFields--;
         }
         if (!CheckData.checkEmail(email.getText().toString())) {
-            email.setError("Email is incorrect");
+            email.setError(Html.fromHtml("<font color='black'>Email is incorrect</font>"), icon);
             checkFields--;
         }
         if (!CheckData.checkCountryOrCity(country.getText().toString())) {
-            country.setError("Country is incorrect");
+            country.setError(Html.fromHtml("<font color='black'>Country is incorrect</font>"), icon);
             checkFields--;
         }
         if (!CheckData.checkCountryOrCity(city.getText().toString())) {
-            city.setError("City is incorrect");
+            city.setError(Html.fromHtml("<font color='black'>City is incorrect</font>"), icon);
             checkFields--;
         }
         if (!CheckData.checkPass(pass.getText().toString())) {
-            pass.setError("Password is incorrect. It must be greater than 8 characters");
+            pass.setError(Html.fromHtml("<font color='black'>Password is incorrect. It must be greater than 8 characters</font>"), icon);
             checkFields--;
         }
         if (!isPassesMatch(pass.getText().toString(), passMatch.getText().toString())) {
-            passMatch.setError("Password does not match");
+            passMatch.setError(Html.fromHtml("<font color='black'>Password does not match</font>"), icon);
             checkFields--;
         }
         if (checkFields < 7)

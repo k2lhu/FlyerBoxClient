@@ -67,7 +67,6 @@ public class Coupon {
         this.expire = expire;
     }
 
-
     public String getCoolTime() {
         Calendar diff = Calendar.getInstance();
         diff.setTimeInMillis(expire.getTime() - new Date().getTime());

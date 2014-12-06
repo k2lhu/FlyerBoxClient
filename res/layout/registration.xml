@@ -3,106 +3,159 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent" android:background="#ffffffff" android:weightSum="1">
-
-
-	<TextView
+			  android:layout_height="match_parent"
+			  android:background="@drawable/logo2"
+			  android:weightSum="1"
+			  android:gravity="center">
+	<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:text="Registration"
-			android:id="@+id/textView" android:layout_gravity="center_horizontal" android:textColor="#e3545454"
-			android:textSize="30dp" android:layout_marginTop="30dp"/>
-
-	<View
-			android:layout_width="wrap_content"
-			android:layout_height="1dp"
-			android:layout_marginBottom="3dp"
-			android:background="@drawable/line_separator" android:layout_gravity="center_vertical"
-			android:layout_marginTop="30dp"/>
-	<TextView
-			android:layout_width="62dp"
-			android:layout_height="wrap_content"
-			android:text="  "
-			android:id="@+id/orTextView" android:layout_gravity="center_horizontal"
-			android:textColor="#d76a6a6a" android:layout_marginTop="-15dp" android:textAlignment="center"
-			android:gravity="center"/>
-
-	<EditText
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:inputType="textPersonName"
-			android:ems="10"
-			android:hint="First name"
-			android:id="@+id/firstNameFieldReg" android:layout_gravity="center_horizontal" android:layout_marginTop="20dp"/>
-	<EditText
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:inputType="textPersonName"
-			android:ems="10"
-			android:hint="Last name"
-			android:id="@+id/lastNameFieldReg" android:layout_gravity="center_horizontal"/>
-	<EditText
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:inputType="textEmailAddress"
-			android:ems="10"
-			android:hint="E-mail"
-			android:id="@+id/emailFieldReg" android:layout_gravity="center_horizontal"/>
-	<ProgressBar
-			style="?android:attr/progressBarStyleLarge"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="center_horizontal"
-			android:id="@+id/registrationProgressBar"
-			android:layout_marginBottom="-76.5dp"
-			android:visibility="gone"
-			/>
-	<EditText
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:inputType="textEmailAddress"
-			android:ems="10"
-			android:hint="Country"
-			android:id="@+id/countryFieldReg" android:layout_gravity="center_horizontal"/>
-	<EditText
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:inputType="textEmailAddress"
-			android:ems="10"
-			android:hint="City"
-			android:id="@+id/cityFieldReg" android:layout_gravity="center_horizontal"/>
-	<EditText
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:inputType="textPassword"
-			android:ems="10"
-			android:hint="Password"
-			android:id="@+id/passFieldReg" android:layout_gravity="center_horizontal"/>
-	<EditText
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:inputType="textPassword"
-			android:ems="10"
-			android:hint="Re-enter"
-			android:id="@+id/passMatchFieldReg" android:layout_gravity="center_horizontal"/>
-	<View
-			android:layout_width="wrap_content"
-			android:layout_height="1dp"
-			android:layout_marginBottom="3dp"
-			android:background="@drawable/line_separator" android:layout_gravity="center_vertical"
-			android:layout_marginTop="20dp"/>
-	<TextView
-			android:layout_width="62dp"
-			android:layout_height="wrap_content"
-			android:text="  "
-			android:id="@+id/orTextView" android:layout_gravity="center_horizontal"
-			android:textColor="#d76a6a6a" android:layout_marginTop="-10dp" android:textAlignment="center"
-			android:gravity="center"/>
-	<Button
-			android:layout_width="200dp"
-			android:layout_height="wrap_content"
-			android:text="Create an account"
-			android:id="@+id/button" android:layout_gravity="center_horizontal" android:layout_marginTop="10dp"
-			android:onClick="createUserButtonClick"/>
+			android:orientation="vertical"
+			android:gravity="center"
+			android:paddingTop="20dp"
+			android:paddingBottom="20dp"
+			android:paddingLeft="60dp"
+			android:paddingRight="60dp"
+			android:background="@drawable/registration_back_blur">
+		<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:textAppearance="?android:attr/textAppearanceLarge"
+				android:text="Registration"
+				android:id="@+id/textView"
+				android:textColor="#ffffffff"
+				android:textSize="30dp"/>
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:background="@drawable/login_separator"
+				android:layout_marginTop="20dp"
+				android:layout_marginBottom="10dp"
+				android:layout_marginRight="25dp"
+				android:layout_marginLeft="25dp"/>
+		<EditText
+				android:layout_width="300dp"
+				android:layout_height="50dp"
+				android:inputType="textPersonName"
+				android:ems="10"
+				android:hint="First name"
+				android:id="@+id/firstNameFieldReg"
+				android:textSize="22sp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:background="@drawable/login_textfield"
+				android:textColor="#ffffff"
+				android:textColorHint="#96ffffff"/>
+		<EditText
+				android:layout_width="300dp"
+				android:layout_height="50dp"
+				android:inputType="textPersonName"
+				android:ems="10"
+				android:hint="Last name"
+				android:id="@+id/lastNameFieldReg"
+				android:layout_marginTop="10dp"
+				android:textSize="22sp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:background="@drawable/login_textfield"
+				android:textColor="#ffffff"
+				android:textColorHint="#96ffffff"/>
+		<EditText
+				android:layout_width="300dp"
+				android:layout_height="50dp"
+				android:inputType="textEmailAddress"
+				android:ems="10"
+				android:hint="E-mail"
+				android:id="@+id/emailFieldReg"
+				android:layout_marginTop="10dp"
+				android:textSize="22sp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:background="@drawable/login_textfield"
+				android:textColor="#ffffff"
+				android:textColorHint="#96ffffff" />
+		<ProgressBar
+				style="?android:attr/progressBarStyleLarge"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				android:id="@+id/registrationProgressBar"
+				android:layout_marginBottom="-76.5dp"
+				android:visibility="gone"
+				/>
+		<EditText
+				android:layout_width="300dp"
+				android:layout_height="50dp"
+				android:inputType="textEmailAddress"
+				android:ems="10"
+				android:hint="Country"
+				android:id="@+id/countryFieldReg"
+				android:layout_marginTop="10dp"
+				android:textSize="22sp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:background="@drawable/login_textfield"
+				android:textColor="#ffffff"
+				android:textColorHint="#96ffffff" />
+		<EditText
+				android:layout_width="300dp"
+				android:layout_height="50dp"
+				android:inputType="textEmailAddress"
+				android:ems="10"
+				android:hint="City"
+				android:id="@+id/cityFieldReg"
+				android:layout_marginTop="10dp"
+				android:textSize="22sp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:background="@drawable/login_textfield"
+				android:textColor="#ffffff"
+				android:textColorHint="#96ffffff" />
+		<EditText
+				android:layout_width="300dp"
+				android:layout_height="50dp"
+				android:inputType="textPassword"
+				android:ems="10"
+				android:hint="Password"
+				android:id="@+id/passFieldReg"
+				android:layout_marginTop="10dp"
+				android:textSize="22sp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:background="@drawable/login_textfield"
+				android:textColor="#ffffff"
+				android:textColorHint="#96ffffff" />
+		<EditText
+				android:layout_width="300dp"
+				android:layout_height="50dp"
+				android:inputType="textPassword"
+				android:ems="10"
+				android:hint="Re-enter"
+				android:id="@+id/passMatchFieldReg"
+				android:layout_marginTop="10dp"
+				android:textSize="22sp"
+				android:paddingLeft="10dp"
+				android:paddingRight="10dp"
+				android:background="@drawable/login_textfield"
+				android:textColor="#ffffff"
+				android:textColorHint="#96ffffff" />
+		<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="2dp"
+				android:background="@drawable/login_separator"
+				android:layout_marginBottom="20dp"
+				android:layout_marginTop="10dp"
+				android:layout_marginRight="25dp"
+				android:layout_marginLeft="25dp"/>
+		<Button
+				android:layout_width="200dp"
+				android:layout_height="50dp"
+				android:text="Create an account"
+				android:id="@+id/button"
+				android:layout_marginTop="10dp"
+				android:onClick="createUserButtonClick"
+				android:textSize="22sp"
+				android:textColor="#ffffff"
+				android:background="@drawable/login_button"/>
+	</LinearLayout>
 </LinearLayout>

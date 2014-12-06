@@ -39,7 +39,7 @@
 
             <item android:bottom="1dp" android:left="5dp">
                 <shape android:shape="rectangle">
-                    <solid android:color="#ffcecece" />
+                    <solid android:color="#fffff49e" />
                 </shape>
             </item>
         </layer-list>

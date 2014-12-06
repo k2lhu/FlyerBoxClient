@@ -5,14 +5,20 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.flyerbox.R;
+import com.flyerbox.logic.Blur;
 import com.flyerbox.logic.CheckData;
 import com.flyerbox.logic.Session;
 import org.apache.http.NameValuePair;
@@ -43,6 +49,9 @@ public class LoginActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        createBlurBackground();
+
         setContentView(R.layout.login);
 
         // Set Progress Spinner
@@ -55,6 +64,24 @@ public class LoginActivity extends Activity {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         }
+    }
+
+    void createBlurBackground(){
+        LinearLayout view = (LinearLayout)findViewById(R.id.loginForm);
+
+//        view.setDrawingCacheEnabled(true);
+//
+//        view.buildDrawingCache();
+//
+//        Bitmap bm = view.getDrawingCache();
+
+        view.measure(View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight());
+        view.buildDrawingCache(true);
+        Bitmap mBitMap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+
+        Blur.fastblur(mBitMap, 100);
     }
 
     public void loginClick(View v) {
@@ -77,20 +104,23 @@ public class LoginActivity extends Activity {
         emailField = (EditText) findViewById(R.id.loginField);
         passField = (EditText) findViewById(R.id.passField);
 
+        Drawable icon = getResources().getDrawable(R.drawable.ic_error);
+        icon.setBounds(0, 0, icon.getIntrinsicWidth() / 2, icon.getIntrinsicHeight() / 2);
+
         if (emailField.getText().toString().length() != 0 && passField.getText().toString().length() != 0 && CheckData.checkEmail(emailField.getText().toString())) {
             return true;
         } else if (!CheckData.checkEmail(emailField.getText().toString())) {
-            emailField.setError("Incorrect email.");
+            emailField.setError(Html.fromHtml("<font color='black'>Incorrect email</font>"), icon);
             return false;
         } else if (emailField.getText().toString().length() == 0 && passField.getText().toString().length() == 0) {
-            emailField.setError("Field required");
-            passField.setError("Field required");
+            emailField.setError(Html.fromHtml("<font color='black'>Field required</font>"), icon);
+            passField.setError(Html.fromHtml("<font color='black'>Field required</font>"), icon);
             return false;
         } else if (emailField.getText().toString().length() == 0) {
-            emailField.setError("Field required");
+            emailField.setError(Html.fromHtml("<font color='black'>Field required</font>"), icon);
             return false;
         } else if (passField.getText().toString().length() == 0)
-            passField.setError("Field required");
+            passField.setError(Html.fromHtml("<font color='black'>Field required</font>"), icon);
         return false;
     }
 
