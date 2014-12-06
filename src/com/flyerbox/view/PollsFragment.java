@@ -3,8 +3,11 @@ package com.flyerbox.view;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -65,6 +68,18 @@ public class PollsFragment extends Fragment {
         return rootView;
     }
 
+    public boolean isOnline() {
+        ConnectivityManager connectivity = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null) {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (NetworkInfo anInfo : info)
+                    if (anInfo.getState() == NetworkInfo.State.CONNECTED) {
+                        return true;
+                    }
+        }
+        return false;
+    }
 
     void runLoadPolls() {
         loadPolls();
@@ -75,13 +90,18 @@ public class PollsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 selectedPollID = ((Poll) parent.getItemAtPosition(position)).getId();
                 Log.d("Polls Fragment", "Selected poll id: " + selectedPollID);
-
-                ConcretePollFragment questionFragment = new ConcretePollFragment();
-                questionFragment.setPollID(selectedPollID);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.frame_container, questionFragment).commit();
-
+                LinearLayout pollsBackground = (LinearLayout) getActivity().findViewById(R.id.pollsNoInternet);
+                if (isOnline()) {
+                    ConcretePollFragment questionFragment = new ConcretePollFragment();
+                    questionFragment.setPollID(selectedPollID);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frame_container, questionFragment).commit();
+                } else {
+                    pollsList.setAdapter(new PollAdapter(getActivity(), new ArrayList<Poll>()));
+                    Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_LONG).show();
+                    pollsBackground.setEnabled(false);
+                }
             }
         });
     }
