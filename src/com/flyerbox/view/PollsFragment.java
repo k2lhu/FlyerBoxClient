@@ -12,10 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.*;
 import com.flyerbox.R;
 import com.flyerbox.logic.Poll;
 import com.flyerbox.logic.PollAdapter;
@@ -99,7 +96,11 @@ public class PollsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
-            runLoadPolls();
+            if (response == null) {
+                Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_LONG).show();
+            } else {
+                runLoadPolls();
+            }
         }
 
         @Override

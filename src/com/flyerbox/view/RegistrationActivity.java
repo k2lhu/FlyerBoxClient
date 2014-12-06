@@ -128,7 +128,6 @@ public class RegistrationActivity extends Activity {
 
         @Override
         protected void onPostExecute(String result) {
-            Log.d("Http Post Response:", response);
             progressDialog.dismiss();
             if (response == null) {
                 Toast.makeText(getApplicationContext(), "No Internet connection", Toast.LENGTH_LONG).show();
@@ -147,6 +146,7 @@ public class RegistrationActivity extends Activity {
         protected void onPreExecute() {
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Loading...");
             progressDialog.show();
         }
 

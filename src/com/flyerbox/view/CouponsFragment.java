@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.flyerbox.R;
 import com.flyerbox.logic.Coupon;
 import com.flyerbox.logic.CouponAdapter;
@@ -44,7 +45,8 @@ public class CouponsFragment extends Fragment {
     private ProgressDialog progressDialog;
     int token = 0;
 
-    public CouponsFragment(){}
+    public CouponsFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +69,7 @@ public class CouponsFragment extends Fragment {
         return rootView;
     }
 
-    void runLoadCoupons(){
+    void runLoadCoupons() {
         loadCoupons();
 
         couponsList.setAdapter(new CouponAdapter(getActivity(), coupons));
@@ -93,7 +95,11 @@ public class CouponsFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             progressDialog.dismiss();
-            loadCoupons();
+            if (response == null) {
+                Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_LONG).show();
+            } else {
+                loadCoupons();
+            }
         }
 
         @Override
@@ -137,7 +143,7 @@ public class CouponsFragment extends Fragment {
                 String surveyDescription = concreteSurvey.getString("description");
 
                 // Create new item in List
-                coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(2014,12,20,0,0,0)));
+                coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(2014, 12, 20, 0, 0, 0)));
 
                 ++couponsCount;
             }
@@ -155,8 +161,8 @@ public class CouponsFragment extends Fragment {
     }
 
     private void loadCoupons() {
-        coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(2014,12,20,0,0,0)));
-        coupons.add(new Coupon(12, "Comfy", false, 7, new Date(2014,12,10,1,2,2)));
+        coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(2014, 12, 20, 0, 0, 0)));
+        coupons.add(new Coupon(12, "Comfy", false, 7, new Date(2014, 12, 10, 1, 2, 2)));
         coupons.add(new Coupon(120, "Eldorado", true, 35, new Date()));
     }
 }
