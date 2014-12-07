@@ -5,8 +5,10 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.*;
@@ -70,44 +72,116 @@ public class ConcretePollFragment extends Fragment {
         token = sharedPreferences.getInt("Token", 0);
 
         // Response to answer clicks
-        rootView.findViewById(R.id.answerOne).setOnClickListener(new LinearLayout.OnClickListener() {
+        rootView.findViewById(R.id.answerItem1).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                selectedAnswerID = 0;
-                currentQuestion = count - 1;
-                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
-                getNext();
+            public void onClick(final View v) {
+                activateAnswer(v, getActivity().findViewById(R.id.answerCircle1), (TextView) getActivity().findViewById(R.id.answerOne));
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        deActivateAnswer(v, getActivity().findViewById(R.id.answerCircle1), (TextView) getActivity().findViewById(R.id.answerOne));
+
+                        selectedAnswerID = 0;
+                        currentQuestion = count - 1;
+                        putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
+
+                        getNext();
+                    }
+                }, 500);
             }
         });
-        rootView.findViewById(R.id.answerTwo).setOnClickListener(new LinearLayout.OnClickListener() {
+        rootView.findViewById(R.id.answerItem2).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                selectedAnswerID = 1;
-                currentQuestion = count - 1;
-                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
-                getNext();
+            public void onClick(final View v) {
+                activateAnswer(v, getActivity().findViewById(R.id.answerCircle2), (TextView) getActivity().findViewById(R.id.answerTwo));
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        deActivateAnswer(v, getActivity().findViewById(R.id.answerCircle2), (TextView) getActivity().findViewById(R.id.answerTwo));
+
+                        selectedAnswerID = 1;
+                        currentQuestion = count - 1;
+                        putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
+
+                        getNext();
+                    }
+                }, 500);
             }
         });
-        rootView.findViewById(R.id.answerThree).setOnClickListener(new LinearLayout.OnClickListener() {
+        rootView.findViewById(R.id.answerItem3).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                selectedAnswerID = 2;
-                currentQuestion = count - 1;
-                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
-                getNext();
+            public void onClick(final View v) {
+                activateAnswer(v, getActivity().findViewById(R.id.answerCircle3), (TextView) getActivity().findViewById(R.id.answerThree));
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        deActivateAnswer(v, getActivity().findViewById(R.id.answerCircle3), (TextView) getActivity().findViewById(R.id.answerThree));
+
+                        selectedAnswerID = 2;
+                        currentQuestion = count - 1;
+                        putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
+
+                        getNext();
+                    }
+                }, 500);
             }
         });
-        rootView.findViewById(R.id.answerFour).setOnClickListener(new LinearLayout.OnClickListener() {
+        rootView.findViewById(R.id.answerItem4).setOnClickListener(new LinearLayout.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                selectedAnswerID = 3;
-                currentQuestion = count - 1;
-                putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
-                getNext();
+            public void onClick(final View v) {
+                activateAnswer(v, getActivity().findViewById(R.id.answerCircle4), (TextView) getActivity().findViewById(R.id.answerFour));
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        deActivateAnswer(v, getActivity().findViewById(R.id.answerCircle4), (TextView) getActivity().findViewById(R.id.answerFour));
+
+                        selectedAnswerID = 3;
+                        currentQuestion = count - 1;
+                        putAnswerToJSON("question_" + currentQuestion, answersArray[selectedAnswerID]);
+
+                        getNext();
+                    }
+                }, 500);
             }
         });
 
         return rootView;
+    }
+
+    private void activateAnswer(final View itemView, final View circleView, final TextView mainText) {
+        getActivity().findViewById(R.id.answerCircle1).setSelected(true);
+        getActivity().findViewById(R.id.answerCircle2).setSelected(true);
+        getActivity().findViewById(R.id.answerCircle3).setSelected(true);
+        getActivity().findViewById(R.id.answerCircle4).setSelected(true);
+        circleView.setSelected(false);
+        circleView.setActivated(true);
+
+        itemView.setActivated(true);
+
+        ((TextView) getActivity().findViewById(R.id.answerOne)).setTextColor(Color.LTGRAY);
+        ((TextView) getActivity().findViewById(R.id.answerTwo)).setTextColor(Color.LTGRAY);
+        ((TextView) getActivity().findViewById(R.id.answerThree)).setTextColor(Color.LTGRAY);
+        ((TextView) getActivity().findViewById(R.id.answerFour)).setTextColor(Color.LTGRAY);
+        mainText.setTextColor(Color.BLACK);
+    }
+
+    private void deActivateAnswer(final View itemView, final View circleView, final TextView mainText) {
+        getActivity().findViewById(R.id.answerCircle1).setSelected(false);
+        getActivity().findViewById(R.id.answerCircle2).setSelected(false);
+        getActivity().findViewById(R.id.answerCircle3).setSelected(false);
+        getActivity().findViewById(R.id.answerCircle4).setSelected(false);
+        circleView.setActivated(false);
+
+        itemView.setActivated(false);
+
+        ((TextView) getActivity().findViewById(R.id.answerOne)).setTextColor(Color.BLACK);
+        ((TextView) getActivity().findViewById(R.id.answerTwo)).setTextColor(Color.BLACK);
+        ((TextView) getActivity().findViewById(R.id.answerThree)).setTextColor(Color.BLACK);
+        ((TextView) getActivity().findViewById(R.id.answerFour)).setTextColor(Color.BLACK);
     }
 
     void getNext() {
@@ -189,7 +263,6 @@ public class ConcretePollFragment extends Fragment {
     }
 
     private void putAnswerToJSON(String question, int answer) {
-        // TODO впихнуть в JSON и отправить нахуй на сервер
         JSONObject concreteQuestionDetail = new JSONObject();
         try {
             concreteQuestionDetail.put("question_id", "" + selectedQuestionID);

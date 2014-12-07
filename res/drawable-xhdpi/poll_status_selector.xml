@@ -18,6 +18,40 @@
         </layer-list>
     </item>
 
+    <item android:state_activated="true">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#95000000" />
+                </shape>
+            </item>
+
+            <item android:bottom="2dp" >
+                <shape android:shape="oval">
+                    <solid android:color="#ffff4b44" />
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+
+    <item android:state_selected="true">
+        <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="#95000000" />
+                </shape>
+            </item>
+
+            <item android:bottom="2dp" >
+                <shape android:shape="oval">
+                    <solid android:color="#56baa8bb" />
+                </shape>
+            </item>
+
+        </layer-list>
+    </item>
+
     <item>
         <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
             <item>

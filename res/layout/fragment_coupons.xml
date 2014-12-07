@@ -6,6 +6,24 @@
 			  android:layout_height="match_parent"
 			  android:background="@drawable/coupons_background"
 			  android:id="@+id/couponsNoInternet">
+	<LinearLayout
+			android:gravity="center"
+			android:layout_width="match_parent"
+			android:layout_height="75dp"
+			android:orientation="vertical"
+			android:background="@drawable/login_button">
+		<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:layout_weight="1"
+				android:text="Coupons"
+				android:textSize="32sp"
+				android:textAlignment="center"
+				android:autoText="false"
+				android:textColor="#ffffffff"
+				android:textStyle="bold"
+				android:gravity="center"/>
+	</LinearLayout>
 	<ListView
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -14,7 +32,7 @@
 			android:dividerHeight="0dp"
 			android:layout_marginLeft="75dp"
 			android:layout_marginRight="75dp"
-			android:layout_marginTop="50dp"
+			android:layout_marginTop="25dp"
 			android:layout_marginBottom="50dp">
 
 	</ListView>

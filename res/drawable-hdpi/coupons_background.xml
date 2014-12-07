@@ -9,7 +9,7 @@
                 </shape>
             </item>
             <item>
-                <bitmap android:src="@drawable/no_connection" android:gravity="center">
+                <bitmap android:src="@drawable/no_connection2" android:gravity="center" >
                 </bitmap>
             </item>
         </layer-list>
