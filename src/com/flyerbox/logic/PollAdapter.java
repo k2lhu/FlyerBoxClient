@@ -61,7 +61,6 @@ public class PollAdapter extends BaseAdapter {
         } else {
             title.setTextColor(Color.BLACK);
         }
-        System.out.println("Position: " + position + " Status: " + data.get(position).isWatched());
 
         convertView.setClickable(getItem(position).isWatched());
         convertView.setEnabled(!getItem(position).isWatched());

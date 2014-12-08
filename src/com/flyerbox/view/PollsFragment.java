@@ -42,6 +42,7 @@ public class PollsFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private String response;
     private int pollsCount = 1;
+    private int pollsCountNotAnswered = 0;
     private ProgressDialog progressDialog;
     int token = 0;
 
@@ -53,21 +54,21 @@ public class PollsFragment extends Fragment {
 
         // Create Progress Spinner
         progressDialog = new ProgressDialog(getActivity());
-
-        // Create new thread ASYNC
-        new getSurveyList().execute();
-
-        // Set View
-        View rootView = inflater.inflate(R.layout.fragment_polls, container, false);
         // Get Shared Preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         token = sharedPreferences.getInt("Token", 0);
+        // Create new thread ASYNC
+        new getSurveyList().execute();
+        // Set View
+        View rootView = inflater.inflate(R.layout.fragment_polls, container, false);
+
         //Load polls to View
         pollsList = (ListView) rootView.findViewById(R.id.pollsList);
 
         return rootView;
     }
 
+    // Check if we have an Internet connection
     public boolean isOnline() {
         ConnectivityManager connectivity = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (connectivity != null) {
@@ -81,6 +82,7 @@ public class PollsFragment extends Fragment {
         return false;
     }
 
+    // Load polls to View
     void runLoadPolls() {
         loadPolls();
 
@@ -157,22 +159,27 @@ public class PollsFragment extends Fragment {
         }
     }
 
+    // Parse response
     void loadPolls() {
         try {
             JSONObject resp = new JSONObject(response);
             while (resp.toString().contains("survey_" + pollsCount)) {
                 JSONObject concreteSurvey = resp.getJSONObject("survey_" + pollsCount);
 
+                // Get data from response
                 String surveyID = concreteSurvey.getString("id");
                 String surveyDescription = concreteSurvey.getString("description");
+                boolean isAnswered = Boolean.parseBoolean(concreteSurvey.getString("answered"));
 
                 // Create new item in List
-                polls.add(new Poll(surveyDescription, "", Integer.parseInt(surveyID)));
+                polls.add(new Poll(surveyDescription, "", Integer.parseInt(surveyID), isAnswered));
 
                 ++pollsCount;
+                pollsCountNotAnswered += (isAnswered) ? 0 : 1;
+
             }
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("pollsCount", pollsCount - 1);
+            editor.putInt("pollsCount", pollsCountNotAnswered);
             editor.apply();
 
             String pollsCountString = String.valueOf(sharedPreferences.getInt("pollsCount", 0));

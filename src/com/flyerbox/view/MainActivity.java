@@ -112,7 +112,6 @@ public class MainActivity extends Activity {
             mDrawerLayout.closeDrawers();
         } else {
             // error in creating fragment
-            Log.e("MainActivity", "Error in creating fragment");
         }
     }
 

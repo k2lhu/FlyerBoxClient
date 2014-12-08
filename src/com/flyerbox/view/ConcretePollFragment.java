@@ -61,15 +61,14 @@ public class ConcretePollFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Set Progress Spinner
         progressDialog = new ProgressDialog(getActivity());
-        // Load data from the server
-        new GetAnswersPostReq().execute();
-
-        // Load view
-        View rootView = inflater.inflate(R.layout.fragment_concrete_poll, container, false);
-
         // Load Shared Preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         token = sharedPreferences.getInt("Token", 0);
+        // Load data from the server
+        new GetAnswersPostReq().execute();
+        // Load view
+        View rootView = inflater.inflate(R.layout.fragment_concrete_poll, container, false);
+
 
         // Response to answer clicks
         rootView.findViewById(R.id.answerItem1).setOnClickListener(new LinearLayout.OnClickListener() {
@@ -186,7 +185,6 @@ public class ConcretePollFragment extends Fragment {
 
     void getNext() {
         try {
-            System.out.println("RESPONSE!!!!!!  " + response);
             JSONObject obj = new JSONObject(response);
             String surveyDescription = obj.getString("survey_description");
             TextView pollName = (TextView) getActivity().findViewById(R.id.pollTitle);
@@ -244,12 +242,11 @@ public class ConcretePollFragment extends Fragment {
 
                 }
                 count++;
-                System.out.println("Count: " + count);
             } else {
+                System.out.println("Пытаемся отправить на сервак нахуй");
+                new PostAnswersPostReq().execute();
                 Dialog completeDialog = new PollDialog(getActivity(), 0, getActivity().getFragmentManager());
                 completeDialog.show();
-
-                new PostAnswersPostReq().execute();
             }
 
         } catch (JSONException e) {
@@ -267,15 +264,12 @@ public class ConcretePollFragment extends Fragment {
         try {
             concreteQuestionDetail.put("question_id", "" + selectedQuestionID);
             concreteQuestionDetail.put("answer_id", "" + answer);
-            System.out.println(concreteQuestionDetail);
 
             completedAnswers.put(question, concreteQuestionDetail);
-            System.out.println(completedAnswers);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 
     private class GetAnswersPostReq extends AsyncTask<String, String, String> {
         @Override
@@ -312,7 +306,7 @@ public class ConcretePollFragment extends Fragment {
 
                 nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(token)));
 
-                System.out.println("Poll Token2: " + String.valueOf(token));
+                System.out.println("Concrete poll Token2: " + String.valueOf(token));
 
                 //собераем их вместе и посылаем на сервер
                 postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
@@ -353,19 +347,16 @@ public class ConcretePollFragment extends Fragment {
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 
                 nameValuePairs.add(new BasicNameValuePair("survey_id", String.valueOf(pollID)));
-
                 nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(token)));
-
-                nameValuePairs.add(new BasicNameValuePair("answers", fullCompletedAnswers.toString()));
+                nameValuePairs.add(new BasicNameValuePair("answers", completedAnswers.toString()));
 
                 //собераем их вместе и посылаем на сервер
                 postMethod.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 //получаем ответ от сервера
                 response = hc.execute(postMethod, res);
-
-                Log.d("Http GetSurvey Post Response:", response);
+                Log.d("Http send Post Response:", response);
             } catch (Exception e) {
-                System.out.println("Exp=" + e + " \n GetSurvey Response from server = " + response);
+                System.out.println("Exp=" + e + " \n send Poll Response from server = " + response);
             }
         }
     }
