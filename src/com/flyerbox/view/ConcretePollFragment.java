@@ -87,7 +87,7 @@ public class ConcretePollFragment extends Fragment {
 
                         getNext();
                     }
-                }, 500);
+                }, 250);
             }
         });
         rootView.findViewById(R.id.answerItem2).setOnClickListener(new LinearLayout.OnClickListener() {
@@ -106,7 +106,7 @@ public class ConcretePollFragment extends Fragment {
 
                         getNext();
                     }
-                }, 500);
+                }, 250);
             }
         });
         rootView.findViewById(R.id.answerItem3).setOnClickListener(new LinearLayout.OnClickListener() {
@@ -125,7 +125,7 @@ public class ConcretePollFragment extends Fragment {
 
                         getNext();
                     }
-                }, 500);
+                }, 250);
             }
         });
         rootView.findViewById(R.id.answerItem4).setOnClickListener(new LinearLayout.OnClickListener() {
@@ -144,7 +144,7 @@ public class ConcretePollFragment extends Fragment {
 
                         getNext();
                     }
-                }, 500);
+                }, 250);
             }
         });
 

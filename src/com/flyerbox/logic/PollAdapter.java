@@ -57,7 +57,7 @@ public class PollAdapter extends BaseAdapter {
         title.setText(getItem(position).getTitle());
         description.setText(getItem(position).getDescription());
         if (getItem(position).isWatched()){
-            title.setTextColor(Color.DKGRAY);
+            title.setTextColor(Color.LTGRAY);
         } else {
             title.setTextColor(Color.BLACK);
         }

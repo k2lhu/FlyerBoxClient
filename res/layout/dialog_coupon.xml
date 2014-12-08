@@ -3,13 +3,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="400dp"
-              android:layout_height="300dp"
+              android:layout_height="400dp"
               android:background="#FFFFFFFF"
               android:weightSum="100">
     <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="41.5"
+            android:layout_weight="43.5"
             android:background="@drawable/dialog_coupon_title"
             android:gravity="center"
             android:padding="10dp"
@@ -21,7 +21,7 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="17"
+            android:layout_weight="13"
             android:orientation="vertical">
         <LinearLayout
                 android:layout_width="match_parent"
@@ -111,12 +111,18 @@
                     android:id="@+id/coupon_dialog_daysleft"
                     android:textStyle="bold"/>
         </LinearLayout>
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:id="@+id/coupon_dialog_barcode"
+                android:paddingBottom="10dp"/>
     </LinearLayout>
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="41.5"
+            android:layout_weight="43.5"
             android:orientation="horizontal">
         <TextView
                 android:layout_width="match_parent"
