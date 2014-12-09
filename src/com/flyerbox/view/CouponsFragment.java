@@ -143,7 +143,7 @@ public class CouponsFragment extends Fragment {
                 String surveyDescription = concreteSurvey.getString("description");
 
                 // Create new item in List
-                coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(2014, 12, 20, 0, 0, 0)));
+                coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new String()));
 
                 ++couponsCount;
             }
@@ -161,8 +161,14 @@ public class CouponsFragment extends Fragment {
     }
 
     private void loadCoupons() {
-        coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(2014, 12, 20, 0, 0, 0)));
-        coupons.add(new Coupon(12, "Comfy", false, 7, new Date(2014, 12, 10, 1, 2, 2)));
-        coupons.add(new Coupon(120, "Eldorado", true, 35, new Date()));
+//        coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(1469960135296L)));
+//        coupons.add(new Coupon(12, "Comfy", false, 7, new Date(1467960135296L)));
+//        coupons.add(new Coupon(120, "Eldorado", true, 35, new Date()));
+//        coupons.add(new Coupon(1254685, "IMAX", false, 10, new Date(1464960135296L)));
+
+        coupons.add(new Coupon(156, "Mc'Donalds", false, 18, "2014-12-24"));
+        coupons.add(new Coupon(12, "Comfy", false, 7,  "2014-12-15"));
+        coupons.add(new Coupon(120, "Eldorado", true, 35, "2014-12-2"));
+        coupons.add(new Coupon(1254685, "IMAX", false, 10, "2014-12-31"));
     }
 }

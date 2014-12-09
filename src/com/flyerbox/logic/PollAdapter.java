@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.flyerbox.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by tmrafael on 02.12.2014.
@@ -23,6 +24,8 @@ public class PollAdapter extends BaseAdapter {
     public PollAdapter(Context context, ArrayList<Poll> data) {
         this.data = data;
         this.context = context;
+
+        Collections.sort(this.data);
     }
 
     @Override
@@ -54,7 +57,13 @@ public class PollAdapter extends BaseAdapter {
         LinearLayout status = (LinearLayout) convertView.findViewById(R.id.pollItemStatus);
 
         item.setTag(getItem(position).getId());
-        title.setText(getItem(position).getTitle());
+
+        if(getItem(position).getTitle().length() > 21) {
+            title.setText(String.copyValueOf(getItem(position).getTitle().toCharArray(), 0, 18) + "...");
+        } else {
+            title.setText(getItem(position).getTitle());
+        }
+
         description.setText(getItem(position).getDescription());
         if (getItem(position).isWatched()){
             title.setTextColor(Color.LTGRAY);

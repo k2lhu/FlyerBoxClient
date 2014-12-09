@@ -68,11 +68,12 @@
                                 android:autoText="false"
                                 android:textColor="#ff343434"
                                 android:layout_gravity="bottom"
-                                android:gravity="center_vertical"/>
+                                android:gravity="center_vertical"
+                                android:id="@+id/couponPercentChar"/>
                 </LinearLayout>
                 <LinearLayout
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:background="@drawable/coupon_status_selector"
@@ -93,7 +94,8 @@
                         android:autoText="false"
                         android:textColor="#74000000"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"/>
+                        android:gravity="center_vertical"
+                        android:id="@+id/couponExpiresString"/>
                 <TextView
                         android:layout_height="25sp"
                         android:layout_width="wrap_content"

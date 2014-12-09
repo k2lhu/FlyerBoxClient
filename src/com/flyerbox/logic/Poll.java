@@ -3,7 +3,7 @@ package com.flyerbox.logic;
 /**
  * Created by tmrafael on 02.12.2014.
  */
-public class Poll {
+public class Poll implements Comparable<Poll> {
     String title;
     String description;
     int id;
@@ -56,5 +56,10 @@ public class Poll {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Poll another) {
+        return (watched)? 1 : another.watched ? -1 : title.compareTo(another.title);
     }
 }
