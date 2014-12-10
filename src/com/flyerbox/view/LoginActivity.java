@@ -51,7 +51,6 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
 
 //        createBlurBackground();
-
         setContentView(R.layout.login);
 
         // Set Progress Spinner
@@ -202,6 +201,7 @@ public class LoginActivity extends Activity {
             editor.putInt("Token", session.getSessionID());
             editor.putString("Email", emailField.getText().toString());
             editor.putInt("pollsCount", 0);
+            editor.putInt("couponsCount", 0);
             editor.apply();
         }
 

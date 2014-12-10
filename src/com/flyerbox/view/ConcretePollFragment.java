@@ -42,15 +42,10 @@ public class ConcretePollFragment extends Fragment {
     private int count = 1;
     private int[] answersArray = new int[4];
 
-    JSONObject fullCompletedAnswers;
     JSONObject completedAnswers = new JSONObject();
 
     int pollID;
     int token = 0;
-
-
-    public ConcretePollFragment() {
-    }
 
     public void setPollID(int pollID) {
         this.pollID = pollID;

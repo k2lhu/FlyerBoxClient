@@ -42,6 +42,7 @@ public class CouponsFragment extends Fragment {
     private SharedPreferences sharedPreferences;
     private String response;
     private int couponsCount = 1;
+    private int couponsCountNotUsed = 0;
     private ProgressDialog progressDialog;
     int token = 0;
 
@@ -51,20 +52,20 @@ public class CouponsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_coupons, container, false);
-        // Load copons from the server
-        // new getCouponsList().execute(); //TODO Load coupons from the server
-
         // Create Progress Spinner
         progressDialog = new ProgressDialog(getActivity());
+
         // Get Shared Preferences
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         token = sharedPreferences.getInt("Token", 0);
 
+        // Load coupons from the server
+        new getCouponsList().execute();
+
+        View rootView = inflater.inflate(R.layout.fragment_coupons, container, false);
+
         // Load coupons ot View
         couponsList = (ListView) rootView.findViewById(R.id.couponsList);
-
-        runLoadCoupons();
 
         return rootView;
     }
@@ -94,11 +95,13 @@ public class CouponsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            progressDialog.dismiss();
+
             if (response == null) {
+                progressDialog.dismiss();
                 Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_LONG).show();
             } else {
-                loadCoupons();
+                runLoadCoupons();
+                progressDialog.dismiss();
             }
         }
 
@@ -116,7 +119,7 @@ public class CouponsFragment extends Fragment {
                 DefaultHttpClient hc = new DefaultHttpClient();
                 ResponseHandler<String> res = new BasicResponseHandler();
                 // post запрос
-                HttpPost postMethod = new HttpPost("http://flyerbox.herokuapp.com/getSurveyList");
+                HttpPost postMethod = new HttpPost("http://flyerbox.herokuapp.com/getCouponList");
                 // передаём параметры в списке
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
                 nameValuePairs.add(new BasicNameValuePair("token", String.valueOf(token)));
@@ -126,49 +129,44 @@ public class CouponsFragment extends Fragment {
                 //получаем ответ от сервера
                 response = hc.execute(postMethod, res);
 
-                Log.d("Http Polls Post Response:", response);
+                Log.d("Http get coupons list Post Response:", response);
             } catch (Exception e) {
-                System.out.println("Exp=" + e + " \n Polls Response from server = " + response);
+                System.out.println("Exp=" + e + " \n get coupons list Response from server = " + response);
             }
-        }
-    }
-
-    void loadCoupons1() {
-        try {
-            JSONObject resp = new JSONObject(response);
-            while (resp.toString().contains("survey_" + couponsCount)) {
-                JSONObject concreteSurvey = resp.getJSONObject("survey_" + couponsCount);
-
-                String surveyID = concreteSurvey.getString("id");
-                String surveyDescription = concreteSurvey.getString("description");
-
-                // Create new item in List
-                coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new String()));
-
-                ++couponsCount;
-            }
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putInt("couponsCount", couponsCount - 1);
-            editor.apply();
-
-            String pollsCountString = String.valueOf(sharedPreferences.getInt("pollsCount", 0));
-            TextView pollsC = (TextView) getActivity().findViewById(R.id.profileNewPolls);
-            pollsC.setText(pollsCountString);
-
-        } catch (JSONException e) {
-            System.out.println("Can't create polls object");
         }
     }
 
     private void loadCoupons() {
-//        coupons.add(new Coupon(156, "Mc'Donalds", false, 18, new Date(1469960135296L)));
-//        coupons.add(new Coupon(12, "Comfy", false, 7, new Date(1467960135296L)));
-//        coupons.add(new Coupon(120, "Eldorado", true, 35, new Date()));
-//        coupons.add(new Coupon(1254685, "IMAX", false, 10, new Date(1464960135296L)));
+        try {
+            JSONObject resp = new JSONObject(response);
+            JSONObject couponObj = resp.getJSONObject("coupons");
+            while (couponObj.toString().contains("coupon_" + couponsCount)) {
+                JSONObject concreteSurvey = couponObj.getJSONObject("coupon_" + couponsCount);
 
-        coupons.add(new Coupon(156, "Mc'Donalds", false, 18, "2014-12-24"));
-        coupons.add(new Coupon(12, "Comfy", false, 7,  "2014-12-15"));
-        coupons.add(new Coupon(120, "Eldorado", true, 35, "2014-12-2"));
-        coupons.add(new Coupon(1254685, "IMAX", false, 10, "2014-12-31"));
+                // Get data from response
+                String couponID = concreteSurvey.getString("id");
+                String couponDescription = concreteSurvey.getString("description");
+                boolean isUsed = Boolean.parseBoolean(concreteSurvey.getString("used"));
+                String discount = concreteSurvey.getString("discount");
+                String dateOfExpiry = concreteSurvey.getString("expiryDate");
+
+                // Create new item in List
+                coupons.add(new Coupon(Integer.parseInt(couponID), couponDescription, isUsed, Integer.parseInt(discount), dateOfExpiry));
+
+                ++couponsCount;
+                couponsCountNotUsed += (isUsed) ? 0 : 1;
+            }
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("couponsCount", couponsCountNotUsed);
+            editor.apply();
+
+            String couponsCountString = String.valueOf(sharedPreferences.getInt("couponsCount", 0));
+            TextView couponsC = (TextView) getActivity().findViewById(R.id.profileNewCoupons);
+            couponsC.setText(couponsCountString);
+
+        } catch (JSONException e) {
+            System.out.println("Can't create coupons object = " + e);
+        }
     }
+
 }

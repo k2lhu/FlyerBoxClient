@@ -66,6 +66,10 @@ public class MainActivity extends Activity {
         String pollsCountString = String.valueOf(sharedPreferences.getInt("pollsCount", 0));
         TextView pollsC = (TextView) findViewById(R.id.profileNewPolls);
         pollsC.setText(pollsCountString);
+        // Set coupons count
+        String couponsCountString = String.valueOf(sharedPreferences.getInt("couponsCount", 0));
+        TextView couponsC = (TextView) findViewById(R.id.profileNewCoupons);
+        couponsC.setText(couponsCountString);
 
     }
 

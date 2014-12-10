@@ -36,9 +36,9 @@ import java.util.List;
  * Created by tmrafael on 13.11.2014.
  */
 public class PollsFragment extends Fragment {
-    ListView pollsList;
-    ArrayList<Poll> polls = new ArrayList<Poll>();
-    int selectedPollID;
+    private ListView pollsList;
+    private ArrayList<Poll> polls = new ArrayList<Poll>();
+    private int selectedPollID;
     private SharedPreferences sharedPreferences;
     private String response;
     private int pollsCount = 1;
