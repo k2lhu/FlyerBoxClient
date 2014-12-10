@@ -12,10 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import com.flyerbox.R;
 import com.flyerbox.logic.Coupon;
 import com.flyerbox.logic.CouponAdapter;
@@ -95,13 +92,15 @@ public class CouponsFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-
+            LinearLayout couponsBackground = (LinearLayout) getActivity().findViewById(R.id.couponsNoInternet);
             if (response == null) {
                 progressDialog.dismiss();
                 Toast.makeText(getActivity(), "No Internet connection", Toast.LENGTH_LONG).show();
+                couponsBackground.setEnabled(false);
             } else {
                 runLoadCoupons();
                 progressDialog.dismiss();
+                couponsBackground.setEnabled(true);
             }
         }
 
