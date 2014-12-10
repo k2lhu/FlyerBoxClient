@@ -94,9 +94,9 @@ public class Coupon implements Comparable<Coupon> {
         diff.setTimeInMillis(expire.getTime() - new Date().getTime());
 
         if(expire.getTime() - new Date().getTime() > 0) {
-            return (diff.get(Calendar.DAY_OF_YEAR) - 1) + " days "
-                    + diff.get(Calendar.HOUR_OF_DAY) + ":"
-                    + diff.get(Calendar.MINUTE) + ":00";
+            return (diff.get(Calendar.DAY_OF_YEAR) - 1) + " day(s) "
+                    + diff.get(Calendar.HOUR_OF_DAY) + " hour(s) "
+                    + diff.get(Calendar.MINUTE) + " minute(s)";
         }
         used = true;
         return "used or expired";

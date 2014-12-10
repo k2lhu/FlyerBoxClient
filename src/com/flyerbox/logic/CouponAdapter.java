@@ -64,6 +64,13 @@ public class CouponAdapter extends BaseAdapter {
         title.setText(getItem(position).getTitle());
         discount.setText("" + getItem(position).getDiscount());
         expire.setText(new SimpleDateFormat("dd.MM.yyyy").format(getItem(position).getExpire()));
+
+        if(getItem(position).getTitle().length() > 21) {
+            title.setText(String.copyValueOf(getItem(position).getTitle().toCharArray(), 0, 18) + "...");
+        } else {
+            title.setText(getItem(position).getTitle());
+        }
+
         if (getItem(position).isUsed()){
             title.setTextColor(Color.LTGRAY);
             discount.setTextColor(Color.LTGRAY);
